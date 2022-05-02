@@ -54,7 +54,7 @@ function calculateBreakDuration() {
 
   let breakDurationSeconds = timeWorkedSeconds * xValueInput.value;
   let breakMinutes = Math.floor(breakDurationSeconds / 60);
-  let breakSeconds = Math.round(breakDurationSeconds % 60);
+  let breakSeconds = Math.ceil(breakDurationSeconds % 60);
   alert(`You have worked for 0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)} \nBreak time is: 0:${displayMinutesOrSeconds(breakMinutes)}:${displayMinutesOrSeconds(breakSeconds)} `);
   console.log(xValueInput.value, timeWorkedSeconds, breakMinutes, breakSeconds);
   seconds = breakSeconds;
