@@ -39,13 +39,13 @@ buttonStart.onclick = function () {
     secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
     minutes = 0;
     minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
-    startInterval = setInterval(startTimer, 1000);
+    startInterval = setInterval(startTimer, 10);
   } else if (this.textContent === "Break") {
     this.textContent = "Start";
     clearInterval(startInterval);
     calculateBreakDuration();
 
-    breakInterval = setInterval(breakTimer, 1000);
+    breakInterval = setInterval(breakTimer, 10);
   }
 };
 
@@ -84,9 +84,9 @@ function startTimer() {
 
   if (seconds > 59) {
     minutes++;
-    // if (minutes === 25) {
-    //   notification.play();
-    // }
+    if (minutes === 25) {
+      notification.play();
+    }
     minutesUp.innerHTML = "0" + minutes;
     seconds = 0;
     secondsUp.innerHTML = "0" + 0;
