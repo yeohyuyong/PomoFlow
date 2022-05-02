@@ -6,22 +6,33 @@ const secondsUp = document.getElementById("secondsUp");
 const minutesUp = document.getElementById("minutesUp");
 const buttonStart = document.getElementById("button-start");
 const xValueInput = document.getElementById("x-value");
+const notificationTimeInput = document.getElementById("notificationTime");
 const modalForm = document.querySelector("#modalForm");
 let startInterval;
 let breakInterval;
 let xValue;
+let notificationTime;
 
 xValueInput.value = localStorage.xValue;
+notificationTimeInput.value = localStorage.notificationTime;
 
-// Notification time change
 
-xValueInput.addEventListener("change", updateValue);
+// X-Value change
+xValueInput.addEventListener("change", updateXValue);
 
-function updateValue(e) {
+function updateXValue(e) {
   xValue = parseFloat(e.target.value);
   window.localStorage.setItem("xValue", xValue);
   xValueInput.value = xValue;
-  // console.log(xValueInput.value, xValue);
+}
+
+// Notification time change
+notificationTimeInput.addEventListener("change", updateNotificationValue);
+
+function updateNotificationValue(e) {
+  notificationTime = e.target.value;
+  window.localStorage.setItem("notificationTime", notificationTime);
+  notificationTimeInput.value = notificationTime;
 }
 
 // Prevent users from pressing enter to submit modal forms
@@ -44,19 +55,16 @@ buttonStart.onclick = function () {
     this.textContent = "Start";
     clearInterval(startInterval);
     calculateBreakDuration();
-
     breakInterval = setInterval(breakTimer, 10);
   }
 };
 
 function calculateBreakDuration() {
   let timeWorkedSeconds = minutes * 60 + seconds;
-
   let breakDurationSeconds = timeWorkedSeconds * xValueInput.value;
   let breakMinutes = Math.floor(breakDurationSeconds / 60);
   let breakSeconds = Math.ceil(breakDurationSeconds % 60);
   alert(`You have worked for 0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)} \nBreak time is: 0:${displayMinutesOrSeconds(breakMinutes)}:${displayMinutesOrSeconds(breakSeconds)} `);
-  console.log(xValueInput.value, timeWorkedSeconds, breakMinutes, breakSeconds);
   seconds = breakSeconds;
   secondsUp.innerHTML = displayMinutesOrSeconds(breakSeconds);
   minutes = breakMinutes;
@@ -84,7 +92,7 @@ function startTimer() {
 
   if (seconds > 59) {
     minutes++;
-    if (minutes === 25) {
+    if (minutes === parseInt(localStorage.notificationTime)) {
       notification.play();
     }
     minutesUp.innerHTML = "0" + minutes;
