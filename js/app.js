@@ -50,12 +50,12 @@ buttonStart.onclick = function () {
     secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
     minutes = 0;
     minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
-    startInterval = setInterval(startTimer, 10);
+    startInterval = setInterval(startTimer, 1000);
   } else if (this.textContent === "Break") {
     this.textContent = "Start";
     clearInterval(startInterval);
     calculateBreakDuration();
-    breakInterval = setInterval(breakTimer, 10);
+    breakInterval = setInterval(breakTimer, 1000);
   }
 };
 
