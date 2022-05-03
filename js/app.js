@@ -120,8 +120,10 @@ function startTimer() {
 function breakTimer() {
   seconds--;
   secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
+  document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
   if (seconds === 0 && minutes === 0) {
     notification.play();
+    document.title = "PomoX"
     clearInterval(breakInterval);
   }
 
@@ -131,6 +133,4 @@ function breakTimer() {
     seconds = 59;
     secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
   }
-
-  document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
 }
