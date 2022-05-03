@@ -67,7 +67,7 @@ buttonStart.onclick = function () {
     this.textContent = "Start";
     clearInterval(startInterval);
     calculateBreakDuration();
-    breakInterval = setInterval(breakTimer, 1000-diff);
+    breakInterval = setInterval(breakTimer, 1000 - diff);
   }
 };
 
@@ -93,7 +93,7 @@ function displayMinutesOrSeconds(time) {
 
 function startTimer() {
   end = new Date().getTime();
-  diff = end-start-1000
+  diff = end - start - 1000
   console.log(diff)
   seconds++;
 
@@ -111,7 +111,7 @@ function startTimer() {
     if (notificationTimeArr !== undefined) {
       if (notificationTimeArr.indexOf(minutes) !== -1) {
         endTime = new Date().getTime();
-        console.log((endTime-startTime)/1000)
+        console.log((endTime - startTime) / 1000)
         notification.play();
       }
     }
