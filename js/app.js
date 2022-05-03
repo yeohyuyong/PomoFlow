@@ -15,6 +15,11 @@ let breakInterval;
 let xValue;
 let notificationTime;
 let notificationTimeArr;
+let start;
+let startTime;
+let endTime;
+let end;
+let diff = 0;
 
 xValueInput.value = localStorage.xValue;
 notificationTimeInput.value = localStorage.notificationTime;
@@ -50,6 +55,7 @@ modalForm.addEventListener("keydown", function (evt) {
 
 buttonStart.onclick = function () {
   if (this.textContent === "Start") {
+    startTime = new Date().getTime();
     this.textContent = "Break";
     clearInterval(breakInterval);
     seconds = 0;
@@ -61,7 +67,7 @@ buttonStart.onclick = function () {
     this.textContent = "Start";
     clearInterval(startInterval);
     calculateBreakDuration();
-    breakInterval = setInterval(breakTimer, 1000);
+    breakInterval = setInterval(breakTimer, 1000-diff);
   }
 };
 
@@ -86,6 +92,9 @@ function displayMinutesOrSeconds(time) {
 }
 
 function startTimer() {
+  end = new Date().getTime();
+  diff = end-start-1000
+  console.log(diff)
   seconds++;
 
   if (seconds <= 9) {
@@ -101,6 +110,8 @@ function startTimer() {
 
     if (notificationTimeArr !== undefined) {
       if (notificationTimeArr.indexOf(minutes) !== -1) {
+        endTime = new Date().getTime();
+        console.log((endTime-startTime)/1000)
         notification.play();
       }
     }
@@ -114,6 +125,7 @@ function startTimer() {
   }
 
   document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time to Work!`;
+  start = new Date().getTime();
 }
 
 function breakTimer() {
