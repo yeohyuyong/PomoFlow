@@ -10,6 +10,7 @@ const buttonStart = document.getElementById("button-start");
 const xValueInput = document.getElementById("x-value");
 const notificationTimeInput = document.getElementById("notificationTime");
 const modalForm = document.querySelector("#modalForm");
+const logTimings = document.querySelector("#logTimings");
 let startInterval;
 let breakInterval;
 let xValue;
@@ -62,12 +63,15 @@ buttonStart.onclick = function () {
     secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
     minutes = 0;
     minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
-    startInterval = setInterval(startTimer, 1000);
+    startInterval = setInterval(startTimer, 1000 - diff);
   } else if (this.textContent === "Break") {
     this.textContent = "Start";
     clearInterval(startInterval);
+    let newItem = document.createElement("li");
+    newItem.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
+    logTimings.append(newItem);
     calculateBreakDuration();
-    breakInterval = setInterval(breakTimer, 1000 - diff);
+    breakInterval = setInterval(breakTimer, 1000);
   }
 };
 
@@ -129,19 +133,18 @@ function startTimer() {
 }
 
 function breakTimer() {
-  seconds--;
-  secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
-  document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
   if (seconds === 0 && minutes === 0) {
     notification.play();
     document.title = "PomoX"
     clearInterval(breakInterval);
-  }
-
-  if (seconds === 0 && minutes > 0) {
+  } else if (seconds === 0 && minutes > 0) {
     minutes--;
     minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
     seconds = 59;
     secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
+  } else {
+    seconds--;
+    secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
+    document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
   }
 }

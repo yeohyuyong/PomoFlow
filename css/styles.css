@@ -29,7 +29,8 @@ main {
   font-size: 7rem;
 }
 
-#settings-button {
+#settings-button,
+#log-button {
   border: 0.2rem solid #f3f3f3;
   color: #f3f3f3;
 }
