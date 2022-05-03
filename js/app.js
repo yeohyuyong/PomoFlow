@@ -96,10 +96,9 @@ function displayMinutesOrSeconds(time) {
 }
 
 function startTimer() {
-  console.log(1000-diff)
   endTime = new Date().getTime();
   diff = (endTime - startTime) % 1000;
-  console.log(endTime-startTime, diff)
+  console.log("Time passed: ", endTime - startTime)
   
   seconds++;
 
@@ -116,7 +115,6 @@ function startTimer() {
 
     if (notificationTimeArr !== undefined) {
       if (notificationTimeArr.indexOf(minutes) !== -1) {
-        endTime = new Date().getTime();
         console.log((endTime - startTime) / 1000)
         notification.play();
       }
