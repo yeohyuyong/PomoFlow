@@ -1,4 +1,6 @@
-import { notification } from "./notification.js";
+import {
+  notification
+} from "./notification.js";
 
 let seconds = "00";
 let minutes = "00";
@@ -16,7 +18,8 @@ let notificationTimeArr;
 
 xValueInput.value = localStorage.xValue;
 notificationTimeInput.value = localStorage.notificationTime;
-
+notificationTimeArr = notificationTimeInput.value.split(",");
+notificationTimeArr = notificationTimeArr.map(time => parseInt(time));
 
 // X-Value change
 xValueInput.addEventListener("change", updateXValue);
@@ -35,8 +38,7 @@ function updateNotificationValue(e) {
   window.localStorage.setItem("notificationTime", notificationTime);
   notificationTimeInput.value = notificationTime;
   notificationTimeArr = notificationTime.split(",");
-  notificationTimeArr = notificationTimeArr.map(time => parseInt(time))
-  alert(notificationTimeArr);
+  notificationTimeArr = notificationTimeArr.map(time => parseInt(time));
 }
 
 // Prevent users from pressing enter to submit modal forms
@@ -54,12 +56,12 @@ buttonStart.onclick = function () {
     secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
     minutes = 0;
     minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
-    startInterval = setInterval(startTimer, 10);
+    startInterval = setInterval(startTimer, 1000);
   } else if (this.textContent === "Break") {
     this.textContent = "Start";
     clearInterval(startInterval);
     calculateBreakDuration();
-    breakInterval = setInterval(breakTimer, 10);
+    breakInterval = setInterval(breakTimer, 1000);
   }
 };
 
@@ -96,8 +98,12 @@ function startTimer() {
 
   if (seconds > 59) {
     minutes++;
-    if (notificationTimeArr.includes(minutes)) {
-      notification.play();
+
+    if (notificationTimeArr !== undefined){
+      
+      if (notificationTimeArr.indexOf(minutes) !== -1) {
+        notification.play();
+      }
     }
     minutesUp.innerHTML = "0" + minutes;
     seconds = 0;
