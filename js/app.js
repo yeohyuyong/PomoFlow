@@ -96,9 +96,11 @@ function displayMinutesOrSeconds(time) {
 }
 
 function startTimer() {
-  end = new Date().getTime();
-  diff = end - start - 1000
-  console.log(diff)
+  console.log(1000-diff)
+  endTime = new Date().getTime();
+  diff = (endTime - startTime) % 1000;
+  console.log(endTime-startTime, diff)
+  
   seconds++;
 
   if (seconds <= 9) {
@@ -129,7 +131,7 @@ function startTimer() {
   }
 
   document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time to Work!`;
-  start = new Date().getTime();
+  
 }
 
 function breakTimer() {
