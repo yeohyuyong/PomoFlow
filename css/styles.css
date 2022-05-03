@@ -30,7 +30,8 @@ main {
 }
 
 #settings-button,
-#log-button {
+#log-button,
+#about-button {
   border: 0.2rem solid #f3f3f3;
   color: #f3f3f3;
 }
