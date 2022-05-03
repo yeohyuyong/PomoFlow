@@ -70,7 +70,7 @@ function calculateBreakDuration() {
   let breakDurationSeconds = timeWorkedSeconds * xValueInput.value;
   let breakMinutes = Math.floor(breakDurationSeconds / 60);
   let breakSeconds = Math.ceil(breakDurationSeconds % 60);
-  alert(`You have worked for 0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)} \nBreak time is: 0:${displayMinutesOrSeconds(breakMinutes)}:${displayMinutesOrSeconds(breakSeconds)} `);
+  alert(`Work Time: ${minutes} minutes ${seconds} seconds \nBreak Time: ${breakMinutes} minutes ${breakSeconds} seconds `);
   seconds = breakSeconds;
   secondsUp.innerHTML = displayMinutesOrSeconds(breakSeconds);
   minutes = breakMinutes;
@@ -99,8 +99,7 @@ function startTimer() {
   if (seconds > 59) {
     minutes++;
 
-    if (notificationTimeArr !== undefined){
-      
+    if (notificationTimeArr !== undefined) {
       if (notificationTimeArr.indexOf(minutes) !== -1) {
         notification.play();
       }
