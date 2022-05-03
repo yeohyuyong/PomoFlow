@@ -24,6 +24,13 @@ let diff = 0;
 
 xValueInput.value = localStorage.xValue;
 notificationTimeInput.value = localStorage.notificationTime;
+
+if (localStorage.logTimings === undefined) {
+  logTimings.innerHTML = "";
+} else {
+  logTimings.innerHTML = localStorage.logTimings;
+}
+
 notificationTimeArr = notificationTimeInput.value.split(",");
 notificationTimeArr = notificationTimeArr.map(time => parseInt(time));
 
@@ -67,13 +74,18 @@ buttonStart.onclick = function () {
   } else if (this.textContent === "Break") {
     this.textContent = "Start";
     clearInterval(startInterval);
-    let newItem = document.createElement("li");
-    newItem.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
-    logTimings.append(newItem);
+    createLogItem();
     calculateBreakDuration();
     breakInterval = setInterval(breakTimer, 1000);
   }
 };
+
+function createLogItem() {
+  let newItem = document.createElement("li");
+  newItem.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
+  logTimings.prepend(newItem);
+  localStorage.logTimings = logTimings.innerHTML;
+}
 
 function calculateBreakDuration() {
   let timeWorkedSeconds = minutes * 60 + seconds;
@@ -99,7 +111,7 @@ function startTimer() {
   endTime = new Date().getTime();
   diff = (endTime - startTime) % 1000;
   // console.log("Time passed: ", endTime - startTime)
-  
+
   seconds++;
 
   if (seconds <= 9) {
@@ -129,7 +141,7 @@ function startTimer() {
   }
 
   document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time to Work!`;
-  
+
 }
 
 function breakTimer() {
