@@ -50,12 +50,12 @@ buttonStart.onclick = function () {
     secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
     minutes = 0;
     minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
-    startInterval = setInterval(startTimer, 1000);
+    startInterval = setInterval(startTimer, 10);
   } else if (this.textContent === "Break") {
     this.textContent = "Start";
     clearInterval(startInterval);
     calculateBreakDuration();
-    breakInterval = setInterval(breakTimer, 1000);
+    breakInterval = setInterval(breakTimer, 10);
   }
 };
 
@@ -103,6 +103,8 @@ function startTimer() {
   if (minutes > 9) {
     minutesUp.innerHTML = minutes;
   }
+
+  document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time to Work!`;
 }
 
 function breakTimer() {
@@ -119,4 +121,6 @@ function breakTimer() {
     seconds = 59;
     secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
   }
+
+  document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
 }
