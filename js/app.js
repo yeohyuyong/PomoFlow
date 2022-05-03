@@ -12,6 +12,7 @@ let startInterval;
 let breakInterval;
 let xValue;
 let notificationTime;
+let notificationTimeArr;
 
 xValueInput.value = localStorage.xValue;
 notificationTimeInput.value = localStorage.notificationTime;
@@ -33,6 +34,9 @@ function updateNotificationValue(e) {
   notificationTime = e.target.value;
   window.localStorage.setItem("notificationTime", notificationTime);
   notificationTimeInput.value = notificationTime;
+  notificationTimeArr = notificationTime.split(",");
+  notificationTimeArr = notificationTimeArr.map(time => parseInt(time))
+  alert(notificationTimeArr);
 }
 
 // Prevent users from pressing enter to submit modal forms
@@ -92,7 +96,7 @@ function startTimer() {
 
   if (seconds > 59) {
     minutes++;
-    if (minutes === parseInt(localStorage.notificationTime)) {
+    if (notificationTimeArr.includes(minutes)) {
       notification.play();
     }
     minutesUp.innerHTML = "0" + minutes;
