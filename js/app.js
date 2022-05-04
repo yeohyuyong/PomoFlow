@@ -17,7 +17,9 @@ let xValue;
 let notificationTime;
 let notificationTimeArr;
 let startTime;
-let diff = 0;
+
+let breakDurationSeconds;
+
 
 xValueInput.value = localStorage.xValue;
 notificationTimeInput.value = localStorage.notificationTime;
@@ -60,7 +62,7 @@ buttonStart.onclick = function () {
     secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
     minutes = 0;
     minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
-    startInterval = setInterval(startTimer, 1000 - diff);
+    startInterval = setInterval(startTimer, 1000);
   } else if (this.textContent === "Break") {
     this.textContent = "Start";
     clearInterval(startInterval);
@@ -68,20 +70,20 @@ buttonStart.onclick = function () {
     newItem.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
     logTimings.append(newItem);
     calculateBreakDuration();
+    startTime = Date.now();
     breakInterval = setInterval(breakTimer, 1000);
   }
 };
 
 function calculateBreakDuration() {
   let timeWorkedSeconds = minutes * 60 + seconds;
-  let breakDurationSeconds = timeWorkedSeconds * xValueInput.value;
+  breakDurationSeconds = Math.ceil(timeWorkedSeconds * xValueInput.value);
   let breakMinutes = Math.floor(breakDurationSeconds / 60);
   let breakSeconds = Math.ceil(breakDurationSeconds % 60);
   alert(`Work Time: ${minutes} minutes ${seconds} seconds \nBreak Time: ${breakMinutes} minutes ${breakSeconds} seconds `);
   seconds = breakSeconds;
-  secondsUp.innerHTML = displayMinutesOrSeconds(breakSeconds);
   minutes = breakMinutes;
-  minutesUp.innerHTML = displayMinutesOrSeconds(breakMinutes);
+  displayTime(minutes, seconds)
 }
 
 function displayMinutesOrSeconds(time) {
@@ -92,53 +94,51 @@ function displayMinutesOrSeconds(time) {
   }
 }
 
-function startTimer() {
-  diff = (Date.now() - startTime) % 1000;
-  console.log(`App Time: ${minutes*60+(seconds+1)} \nActual Time: ${(Date.now() - startTime)/1000} \nDifference: ${(Date.now() - startTime) % 1000}`)
-  seconds++;
-
+function displayTime(minutes, seconds) {
+  if (minutes <= 9) {
+    minutesUp.innerHTML = "0" + minutes
+  } else {
+    minutesUp.innerHTML = minutes
+  }
   if (seconds <= 9) {
-    secondsUp.innerHTML = "0" + seconds;
+    secondsUp.innerHTML = "0" + seconds
+  } else {
+    secondsUp.innerHTML = seconds
   }
+}
 
-  if (seconds > 9) {
-    secondsUp.innerHTML = seconds;
-  }
+function startTimer() {
+  let millisecondsPassed = Date.now() - startTime;
+  let secondsPassed = Math.floor(millisecondsPassed / 1000);
+  minutes = Math.floor(secondsPassed / 60);
+  seconds = secondsPassed % 60;
 
-  if (seconds > 59) {
-    minutes++;
+  displayTime(minutes, seconds)
 
-    if (notificationTimeArr !== undefined) {
-      if (notificationTimeArr.indexOf(minutes) !== -1) {
-        console.log((Date.now() - startTime) / 1000)
-        notification.play();
-      }
-    }
-    minutesUp.innerHTML = "0" + minutes;
-    seconds = 0;
-    secondsUp.innerHTML = "0" + 0;
-  }
-
-  if (minutes > 9) {
-    minutesUp.innerHTML = minutes;
+  if (notificationTimeArr.indexOf(minutes) !== -1 && seconds === 0) {
+    notification.play();
   }
 
   document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time to Work!`;
 }
 
 function breakTimer() {
-  if (seconds === 0 && minutes === 0) {
+  let millisecondsPassed = Date.now() - startTime;
+  let secondsPassed = Math.floor(millisecondsPassed / 1000);
+  if (breakDurationSeconds === 0) {
     notification.play();
     document.title = "PomoX"
     clearInterval(breakInterval);
-  } else if (seconds === 0 && minutes > 0) {
-    minutes--;
-    minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
-    seconds = 59;
-    secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
   } else {
-    seconds--;
-    secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
+    let secondsRemaining = breakDurationSeconds - secondsPassed;
+    minutes = Math.floor(secondsRemaining / 60);
+    seconds = secondsRemaining % 60;
+    displayTime(minutes, seconds)
     document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
+    if (secondsRemaining <= 0) {
+      document.title = "PomoX"
+      notification.play();
+      clearInterval(breakInterval);
+    }
   }
 }
