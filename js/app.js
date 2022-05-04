@@ -16,10 +16,7 @@ let breakInterval;
 let xValue;
 let notificationTime;
 let notificationTimeArr;
-let start;
 let startTime;
-let endTime;
-let end;
 let diff = 0;
 
 xValueInput.value = localStorage.xValue;
@@ -97,7 +94,7 @@ function displayMinutesOrSeconds(time) {
 
 function startTimer() {
   diff = (Date.now() - startTime) % 1000;
-  
+  console.log(Date.now() - startTime)
   seconds++;
 
   if (seconds <= 9) {
