@@ -84,6 +84,7 @@ function calculateBreakDuration() {
   seconds = breakSeconds;
   minutes = breakMinutes;
   displayTime(minutes, seconds)
+  document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
 }
 
 function displayMinutesOrSeconds(time) {
@@ -112,14 +113,11 @@ function startTimer() {
   let secondsPassed = Math.floor(millisecondsPassed / 1000);
   minutes = Math.floor(secondsPassed / 60);
   seconds = secondsPassed % 60;
-
   displayTime(minutes, seconds)
-
   if (notificationTimeArr.indexOf(minutes) !== -1 && seconds === 0) {
     notification.play();
   }
-
-  document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time to Work!`;
+  document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for Work!`;
 }
 
 function breakTimer() {
