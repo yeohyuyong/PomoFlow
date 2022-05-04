@@ -94,7 +94,7 @@ function displayMinutesOrSeconds(time) {
 
 function startTimer() {
   diff = (Date.now() - startTime) % 1000;
-  console.log(Date.now() - startTime)
+  console.log(`App Time: ${minutes*60+(seconds+1)} \nActual Time: ${(Date.now() - startTime)/1000} \nDifference: ${(Date.now() - startTime) % 1000}`)
   seconds++;
 
   if (seconds <= 9) {
@@ -124,7 +124,6 @@ function startTimer() {
   }
 
   document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time to Work!`;
-  
 }
 
 function breakTimer() {
