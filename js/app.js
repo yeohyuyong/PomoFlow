@@ -68,7 +68,7 @@ buttonStart.onclick = function () {
     clearInterval(startInterval);
     let newItem = document.createElement("li");
     newItem.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
-    logTimings.append(newItem);
+    logTimings.prepend(newItem);
     calculateBreakDuration();
     startTime = Date.now();
     breakInterval = setInterval(breakTimer, 1000);
