@@ -56,7 +56,7 @@ modalForm.addEventListener("keydown", function (evt) {
 
 buttonStart.onclick = function () {
   if (this.textContent === "Start") {
-    startTime = new Date().getTime();
+    startTime = Date.now();
     this.textContent = "Break";
     clearInterval(breakInterval);
     seconds = 0;
@@ -96,9 +96,7 @@ function displayMinutesOrSeconds(time) {
 }
 
 function startTimer() {
-  endTime = new Date().getTime();
-  diff = (endTime - startTime) % 1000;
-  // console.log("Time passed: ", endTime - startTime)
+  diff = (Date.now() - startTime) % 1000;
   
   seconds++;
 
@@ -115,7 +113,7 @@ function startTimer() {
 
     if (notificationTimeArr !== undefined) {
       if (notificationTimeArr.indexOf(minutes) !== -1) {
-        console.log((endTime - startTime) / 1000, )
+        console.log((Date.now() - startTime) / 1000)
         notification.play();
       }
     }
