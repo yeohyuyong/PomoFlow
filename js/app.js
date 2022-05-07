@@ -1,5 +1,6 @@
 import {
-  timerNotificationSound, breakNotificationSound
+  timerNotificationSound,
+  breakNotificationSound
 } from "./notification.js";
 
 let seconds = "00";
@@ -25,9 +26,15 @@ let startTime;
 let breakDurationSeconds;
 
 
+if (localStorage.logTimings === undefined) {
+  logTimings.innerHTML = "";
+} else {
+  logTimings.innerHTML = localStorage.logTimings;
+}
+
 xValueInput.value = localStorage.xValue;
 
-if (localStorage.timerNotification === undefined){
+if (localStorage.timerNotification === undefined) {
   timerNotificationInput.value = "";
 } else {
   timerNotificationInput.value = localStorage.timerNotification;
@@ -35,7 +42,7 @@ if (localStorage.timerNotification === undefined){
   timerNotificationArr = timerNotificationArr.map(time => parseInt(time));
 }
 
-if (localStorage.breakNotification === undefined){
+if (localStorage.breakNotification === undefined) {
   breakNotificationInput.value = "";
 } else {
   breakNotificationInput.value = localStorage.breakNotification;
