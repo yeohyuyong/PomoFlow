@@ -151,6 +151,9 @@ function breakTimer() {
     minutes = Math.floor(secondsRemaining / 60);
     seconds = secondsRemaining % 60;
     displayTime(minutes, seconds)
+    if (breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
+      notification.play();
+    }
     document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
     if (secondsRemaining <= 0) {
       document.title = "PomoX"
