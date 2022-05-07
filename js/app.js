@@ -52,7 +52,7 @@ function updateXValue(e) {
   xValueInput.value = xValue;
 }
 
-// Notification time change
+// Timer notification updated
 timerNotificationInput.addEventListener("change", updateNotificationValueTimer);
 
 function updateNotificationValueTimer(e) {
@@ -63,6 +63,7 @@ function updateNotificationValueTimer(e) {
   timerNotificationArr = timerNotificationArr.map(time => parseInt(time));
 }
 
+// Break notification updated
 breakNotificationInput.addEventListener("change", updateNotificationValueBreak);
 
 function updateNotificationValueBreak(e) {
