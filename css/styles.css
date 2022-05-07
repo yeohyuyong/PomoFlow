@@ -74,25 +74,8 @@ main {
   color: #141414 !important;
 }
 
-#clipboardIcon:hover {
-  cursor: pointer;
-}
-
-#flipButton {
-  outline: none;
+.close-button {
+  outline:none;
   border: none;
-  background-color: #141414;
-  color: #f3f3f3;
-}
-
-.displayHidden {
-  display: none;
-}
-
-.VisibilityHidden {
-  visibility: hidden;
-}
-
-.greenText {
-  color: green;
+  background-color: white;
 }
