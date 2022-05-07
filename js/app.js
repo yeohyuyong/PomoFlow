@@ -26,13 +26,22 @@ let breakDurationSeconds;
 
 
 xValueInput.value = localStorage.xValue;
-timerNotificationInput.value = localStorage.timerNotification;
-timerNotificationArr = timerNotificationInput.value.split(",");
-timerNotificationArr = timerNotificationArr.map(time => parseInt(time));
 
-breakNotificationInput.value = localStorage.breakNotification;
-breakNotificationArr = breakNotificationInput.value.split(",");
-breakNotificationArr = breakNotificationArr.map(time => parseInt(time));
+if (localStorage.timerNotification === undefined){
+  timerNotificationInput.value = "";
+} else {
+  timerNotificationInput.value = localStorage.timerNotification;
+  timerNotificationArr = timerNotificationInput.value.split(",");
+  timerNotificationArr = timerNotificationArr.map(time => parseInt(time));
+}
+
+if (localStorage.breakNotification === undefined){
+  breakNotificationInput.value = "";
+} else {
+  breakNotificationInput.value = localStorage.breakNotification;
+  breakNotificationArr = breakNotificationInput.value.split(",");
+  breakNotificationArr = breakNotificationArr.map(time => parseInt(time));
+}
 
 // X-Value change
 xValueInput.addEventListener("change", updateXValue);
@@ -133,7 +142,7 @@ function startTimer() {
   minutes = Math.floor(secondsPassed / 60);
   seconds = secondsPassed % 60;
   displayTime(minutes, seconds)
-  if (timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
+  if (timerNotificationArr !== undefined && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
     notification.play();
   }
   document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for Work!`;
@@ -151,7 +160,7 @@ function breakTimer() {
     minutes = Math.floor(secondsRemaining / 60);
     seconds = secondsRemaining % 60;
     displayTime(minutes, seconds)
-    if (breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
+    if (breakNotificationArr !== undefined && breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
       notification.play();
     }
     document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
