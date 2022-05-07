@@ -8,23 +8,27 @@ const secondsUp = document.getElementById("secondsUp");
 const minutesUp = document.getElementById("minutesUp");
 const buttonStart = document.getElementById("button-start");
 const xValueInput = document.getElementById("x-value");
-const notificationTimeInput = document.getElementById("notificationTime");
+const timerNotificationInput = document.getElementById("timerNotification");
+const breakNotificationInput = document.getElementById("breakNotification");
 const modalForm = document.querySelector("#modalForm");
 const logTimings = document.querySelector("#logTimings");
 let startInterval;
 let breakInterval;
 let xValue;
-let notificationTime;
-let notificationTimeArr;
+
+let breakNotification
+let breakNotificationArr;
+let timerNotification;
+let timerNotificationArr;
 let startTime;
 
 let breakDurationSeconds;
 
 
 xValueInput.value = localStorage.xValue;
-notificationTimeInput.value = localStorage.notificationTime;
-notificationTimeArr = notificationTimeInput.value.split(",");
-notificationTimeArr = notificationTimeArr.map(time => parseInt(time));
+timerNotificationInput.value = localStorage.timerNotification;
+timerNotificationArr = timerNotificationInput.value.split(",");
+timerNotificationArr = timerNotificationArr.map(time => parseInt(time));
 
 // X-Value change
 xValueInput.addEventListener("change", updateXValue);
@@ -36,14 +40,14 @@ function updateXValue(e) {
 }
 
 // Notification time change
-notificationTimeInput.addEventListener("change", updateNotificationValue);
+timerNotificationInput.addEventListener("change", updateNotificationValue);
 
 function updateNotificationValue(e) {
-  notificationTime = e.target.value;
-  window.localStorage.setItem("notificationTime", notificationTime);
-  notificationTimeInput.value = notificationTime;
-  notificationTimeArr = notificationTime.split(",");
-  notificationTimeArr = notificationTimeArr.map(time => parseInt(time));
+  timerNotification = e.target.value;
+  window.localStorage.setItem("timerNotification", timerNotification);
+  timerNotificationInput.value = timerNotification;
+  timerNotificationArr = timerNotification.split(",");
+  timerNotificationArr = timerNotificationArr.map(time => parseInt(time));
 }
 
 // Prevent users from pressing enter to submit modal forms
@@ -114,7 +118,7 @@ function startTimer() {
   minutes = Math.floor(secondsPassed / 60);
   seconds = secondsPassed % 60;
   displayTime(minutes, seconds)
-  if (notificationTimeArr.indexOf(minutes) !== -1 && seconds === 0) {
+  if (timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
     notification.play();
   }
   document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for Work!`;
