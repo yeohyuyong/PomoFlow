@@ -1,8 +1,14 @@
-let notification = new Howl({
-  src: ["assets/sounds/notification-bell.mp3"],
+let timerNotificationSound = new Howl({
+  src: ["assets/sounds/timer-notification.mp3"],
   volume: 0.3,
 });
 
+let breakNotificationSound = new Howl({
+  src: ["assets/sounds/break-notification.mp3"],
+  volume: 0.3,
+});
+
+
 export {
-  notification
+  timerNotificationSound, breakNotificationSound
 };

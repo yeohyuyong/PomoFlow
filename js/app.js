@@ -1,5 +1,5 @@
 import {
-  notification
+  timerNotificationSound, breakNotificationSound
 } from "./notification.js";
 
 let seconds = "00";
@@ -143,7 +143,7 @@ function startTimer() {
   seconds = secondsPassed % 60;
   displayTime(minutes, seconds)
   if (timerNotificationArr !== undefined && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
-    notification.play();
+    timerNotificationSound.play();
   }
   document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for Work!`;
 }
@@ -152,7 +152,7 @@ function breakTimer() {
   let millisecondsPassed = Date.now() - startTime;
   let secondsPassed = Math.floor(millisecondsPassed / 1000);
   if (breakDurationSeconds === 0) {
-    notification.play();
+    breakNotificationSound.play();
     document.title = "PomoX"
     clearInterval(breakInterval);
   } else {
@@ -161,12 +161,12 @@ function breakTimer() {
     seconds = secondsRemaining % 60;
     displayTime(minutes, seconds)
     if (breakNotificationArr !== undefined && breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
-      notification.play();
+      breakNotificationSound.play();
     }
     document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
     if (secondsRemaining <= 0) {
       document.title = "PomoX"
-      notification.play();
+      breakNotificationSound.play();
       clearInterval(breakInterval);
     }
   }
