@@ -79,3 +79,7 @@ main {
   border: none;
   background-color: white;
 }
+
+.img-hidden {
+  display:none;
+}

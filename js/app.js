@@ -1,7 +1,4 @@
-import {
-  timerNotificationSound,
-  breakNotificationSound
-} from "./notification.js";
+import { timerNotificationSound, breakNotificationSound } from "./notification.js";
 
 let seconds = "00";
 let minutes = "00";
@@ -25,7 +22,6 @@ let startTime;
 
 let breakDurationSeconds;
 
-
 if (localStorage.logTimings === undefined) {
   logTimings.innerHTML = "";
 } else {
@@ -39,7 +35,7 @@ if (localStorage.timerNotification === undefined) {
 } else {
   timerNotificationInput.value = localStorage.timerNotification;
   timerNotificationArr = timerNotificationInput.value.split(",");
-  timerNotificationArr = timerNotificationArr.map(time => parseInt(time));
+  timerNotificationArr = timerNotificationArr.map((time) => parseInt(time));
 }
 
 if (localStorage.breakNotification === undefined) {
@@ -47,7 +43,7 @@ if (localStorage.breakNotification === undefined) {
 } else {
   breakNotificationInput.value = localStorage.breakNotification;
   breakNotificationArr = breakNotificationInput.value.split(",");
-  breakNotificationArr = breakNotificationArr.map(time => parseInt(time));
+  breakNotificationArr = breakNotificationArr.map((time) => parseInt(time));
 }
 
 // X-Value change
@@ -67,7 +63,7 @@ function updateNotificationValueTimer(e) {
   window.localStorage.setItem("timerNotification", timerNotification);
   timerNotificationInput.value = timerNotification;
   timerNotificationArr = timerNotification.split(",");
-  timerNotificationArr = timerNotificationArr.map(time => parseInt(time));
+  timerNotificationArr = timerNotificationArr.map((time) => parseInt(time));
 }
 
 // Break notification updated
@@ -78,9 +74,8 @@ function updateNotificationValueBreak(e) {
   window.localStorage.setItem("breakNotification", breakNotification);
   breakNotificationInput.value = breakNotification;
   breakNotificationArr = breakNotification.split(",");
-  breakNotificationArr = breakNotificationArr.map(time => parseInt(time));
+  breakNotificationArr = breakNotificationArr.map((time) => parseInt(time));
 }
-
 
 // Prevent users from pressing enter to submit modal forms
 modalForm.addEventListener("keydown", function (evt) {
@@ -109,8 +104,6 @@ buttonStart.onclick = function () {
   }
 };
 
-
-
 function createLogItem() {
   let newItem = document.createElement("li");
   let span = document.createElement("SPAN");
@@ -125,8 +118,6 @@ function createLogItem() {
   localStorage.logTimings = logTimings.innerHTML;
 }
 
-
-
 function calculateBreakDuration() {
   let timeWorkedSeconds = minutes * 60 + seconds;
   breakDurationSeconds = Math.ceil(timeWorkedSeconds * xValueInput.value);
@@ -135,7 +126,7 @@ function calculateBreakDuration() {
   alert(`Work Time: ${minutes} minutes ${seconds} seconds \nBreak Time: ${breakMinutes} minutes ${breakSeconds} seconds `);
   seconds = breakSeconds;
   minutes = breakMinutes;
-  displayTime(minutes, seconds)
+  displayTime(minutes, seconds);
   document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
 }
 
@@ -149,14 +140,14 @@ function displayMinutesOrSeconds(time) {
 
 function displayTime(minutes, seconds) {
   if (minutes <= 9) {
-    minutesUp.innerHTML = "0" + minutes
+    minutesUp.innerHTML = "0" + minutes;
   } else {
-    minutesUp.innerHTML = minutes
+    minutesUp.innerHTML = minutes;
   }
   if (seconds <= 9) {
-    secondsUp.innerHTML = "0" + seconds
+    secondsUp.innerHTML = "0" + seconds;
   } else {
-    secondsUp.innerHTML = seconds
+    secondsUp.innerHTML = seconds;
   }
 }
 
@@ -165,7 +156,7 @@ function startTimer() {
   let secondsPassed = Math.floor(millisecondsPassed / 1000);
   minutes = Math.floor(secondsPassed / 60);
   seconds = secondsPassed % 60;
-  displayTime(minutes, seconds)
+  displayTime(minutes, seconds);
   if (timerNotificationArr !== undefined && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
     timerNotificationSound.play();
   }
@@ -177,21 +168,42 @@ function breakTimer() {
   let secondsPassed = Math.floor(millisecondsPassed / 1000);
   if (breakDurationSeconds === 0) {
     breakNotificationSound.play();
-    document.title = "PomoX"
+    document.title = "PomoX";
     clearInterval(breakInterval);
   } else {
     let secondsRemaining = breakDurationSeconds - secondsPassed;
     minutes = Math.floor(secondsRemaining / 60);
     seconds = secondsRemaining % 60;
-    displayTime(minutes, seconds)
+    displayTime(minutes, seconds);
     if (breakNotificationArr !== undefined && breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
       breakNotificationSound.play();
     }
     document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
     if (secondsRemaining <= 0) {
-      document.title = "PomoX"
+      document.title = "PomoX";
       breakNotificationSound.play();
       clearInterval(breakInterval);
     }
   }
+}
+
+//Nav button Hover effects
+
+const navButtons = document.querySelectorAll(".nav-button");
+for (let i=0;i<navButtons.length;i++){
+  navButtons[i].addEventListener("mouseover", function(){
+    let buttonImgs = this.children
+    for (let img of buttonImgs){
+    img.classList.toggle("img-hidden");
+    }
+   }
+  )
+
+  navButtons[i].addEventListener("mouseout", function(){
+    let buttonImgs = this.children
+    for (let img of buttonImgs){
+    img.classList.toggle("img-hidden");
+    }
+   }
+  )
 }
