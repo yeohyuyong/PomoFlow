@@ -16,7 +16,7 @@ let startInterval;
 let breakInterval;
 let xValue;
 
-let breakNotification
+let breakNotification;
 let breakNotificationArr;
 let timerNotification;
 let timerNotificationArr;
@@ -30,6 +30,10 @@ timerNotificationInput.value = localStorage.timerNotification;
 timerNotificationArr = timerNotificationInput.value.split(",");
 timerNotificationArr = timerNotificationArr.map(time => parseInt(time));
 
+breakNotificationInput.value = localStorage.breakNotification;
+breakNotificationArr = breakNotificationInput.value.split(",");
+breakNotificationArr = breakNotificationArr.map(time => parseInt(time));
+
 // X-Value change
 xValueInput.addEventListener("change", updateXValue);
 
@@ -40,15 +44,26 @@ function updateXValue(e) {
 }
 
 // Notification time change
-timerNotificationInput.addEventListener("change", updateNotificationValue);
+timerNotificationInput.addEventListener("change", updateNotificationValueTimer);
 
-function updateNotificationValue(e) {
+function updateNotificationValueTimer(e) {
   timerNotification = e.target.value;
   window.localStorage.setItem("timerNotification", timerNotification);
   timerNotificationInput.value = timerNotification;
   timerNotificationArr = timerNotification.split(",");
   timerNotificationArr = timerNotificationArr.map(time => parseInt(time));
 }
+
+breakNotificationInput.addEventListener("change", updateNotificationValueBreak);
+
+function updateNotificationValueBreak(e) {
+  breakNotification = e.target.value;
+  window.localStorage.setItem("breakNotification", breakNotification);
+  breakNotificationInput.value = breakNotification;
+  breakNotificationArr = breakNotification.split(",");
+  breakNotificationArr = breakNotificationArr.map(time => parseInt(time));
+}
+
 
 // Prevent users from pressing enter to submit modal forms
 modalForm.addEventListener("keydown", function (evt) {

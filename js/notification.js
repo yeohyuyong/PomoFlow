@@ -3,4 +3,6 @@ let notification = new Howl({
   volume: 0.3,
 });
 
-export { notification };
+export {
+  notification
+};
