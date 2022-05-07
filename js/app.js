@@ -95,14 +95,30 @@ buttonStart.onclick = function () {
   } else if (this.textContent === "Break") {
     this.textContent = "Start";
     clearInterval(startInterval);
-    let newItem = document.createElement("li");
-    newItem.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
-    logTimings.prepend(newItem);
+    createLogItem();
     calculateBreakDuration();
     startTime = Date.now();
     breakInterval = setInterval(breakTimer, 1000);
   }
 };
+
+
+
+function createLogItem() {
+  let newItem = document.createElement("li");
+  let span = document.createElement("SPAN");
+  let button = document.createElement("button");
+  button.textContent = "\u00D7";
+  button.setAttribute("onclick", "deleteLog(this)");
+  button.classList.add("close-button");
+  span.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
+  span.append(button);
+  newItem.append(span);
+  logTimings.prepend(newItem);
+  localStorage.logTimings = logTimings.innerHTML;
+}
+
+
 
 function calculateBreakDuration() {
   let timeWorkedSeconds = minutes * 60 + seconds;

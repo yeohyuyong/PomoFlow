@@ -1,74 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/bootstrap-5.1.3-dist/css/bootstrap.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="icon" href="assets/icons/timer-title.png" type="image/icon type" />
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
-    <title>PomoX</title>
-  </head>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <body>
-    <main>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="assets/bootstrap-5.1.3-dist/css/bootstrap.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/icons/timer-title.png" type="image/icon type" />
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <title>PomoX</title>
+</head>
 
-      <!-- Navbar -->
-      <div class="container-fluid" id="navbar">
-        <div class="row justify-content-end align-items-center pt-2">
+<body>
+  <main>
 
-          <!-- About Modal Button -->
-          <div class="col-3 text-center">
-            <button type="button" class="btn" id="about-button" data-bs-toggle="modal" data-bs-target="#aboutModal">
-              <img src="https://img.icons8.com/ios-glyphs/30/ffffff/about.png"/>
-            </button>
-          </div>
+    <!-- Navbar -->
+    <div class="container-fluid" id="navbar">
+      <div class="row justify-content-end align-items-center pt-2">
 
-          <!-- PomoX Title -->
-          <div class="col-6 text-center">
-            <span class="navbar-brand mb-0 h1 text-light text-align-center" id="navbar-title"> <img src="https://img.icons8.com/ios/50/ffffff/timer.png" />PomoX</span>
-          </div>
+        <!-- About Modal Button -->
+        <div class="col-3 text-center">
+          <button type="button" class="btn" id="about-button" data-bs-toggle="modal" data-bs-target="#aboutModal">
+            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/about.png" />
+          </button>
+        </div>
 
-          <!-- Setting and Log Modal Button -->
-          <div class="col-3 text-center">
-            <button type="button" class="btn" id="log-button" data-bs-toggle="modal" data-bs-target="#logModal">
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAA3UlEQVRIie3UzUrDQBSG4Ym7KqIVpf7QRfHe7KZeoSC4EbF1oQtFF6XqhTxuTjWENHVsQAr9VjMnZ973TAJJaZOciLTJ3GoTtt4CHGC4rKnxG6CDzgL4Qxy//JMA27jCDXZL9S7GcfQNZ9kC7ODaT+5j6i4mUXtthC8SYA+38egds1hP8BTrZxw3wusE2MddlGc4Rz+mnecFJ0vhVUHl3U4xKPX18JgFrxEMSxOe1vQe4ujX8Kog9iP0siA5gjayPr+KfxMU5Q0+Ukr9laFF8c2t3uAipfS5qmCTrHwB/TtBja7+dEUAAAAASUVORK5CYII="/>
-            </button>
-            <button type="button" class="btn" id="settings-button" data-bs-toggle="modal" data-bs-target="#settingsModal">
-              <img src="https://img.icons8.com/material-outlined/24/ffffff/gear--v1.png"/>
-            </button>
-          </div>
+        <!-- PomoX Title -->
+        <div class="col-6 text-center">
+          <span class="navbar-brand mb-0 h1 text-light text-align-center" id="navbar-title"> <img
+              src="https://img.icons8.com/ios/50/ffffff/timer.png" />PomoX</span>
+        </div>
+
+        <!-- Setting and Log Modal Button -->
+        <div class="col-3 text-center">
+          <button type="button" class="btn" id="log-button" data-bs-toggle="modal" data-bs-target="#logModal">
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAA3UlEQVRIie3UzUrDQBSG4Ym7KqIVpf7QRfHe7KZeoSC4EbF1oQtFF6XqhTxuTjWENHVsQAr9VjMnZ973TAJJaZOciLTJ3GoTtt4CHGC4rKnxG6CDzgL4Qxy//JMA27jCDXZL9S7GcfQNZ9kC7ODaT+5j6i4mUXtthC8SYA+38egds1hP8BTrZxw3wusE2MddlGc4Rz+mnecFJ0vhVUHl3U4xKPX18JgFrxEMSxOe1vQe4ujX8Kog9iP0siA5gjayPr+KfxMU5Q0+Ukr9laFF8c2t3uAipfS5qmCTrHwB/TtBja7+dEUAAAAASUVORK5CYII=" />
+          </button>
+          <button type="button" class="btn" id="settings-button" data-bs-toggle="modal" data-bs-target="#settingsModal">
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/gear--v1.png" />
+          </button>
         </div>
       </div>
+    </div>
 
-      <div class="container wrapper" id="time-display">
-        <p><span class="minutes timerText" id="minutesUp">00</span><span class="colon timerText">:</span><span class="seconds timerText" id="secondsUp">00</span></p>
-        <div class="timer-buttons">
-          <button id="button-start">Start</button>
-        </div>
+    <div class="container wrapper" id="time-display">
+      <p><span class="minutes timerText" id="minutesUp">00</span><span class="colon timerText">:</span><span
+          class="seconds timerText" id="secondsUp">00</span></p>
+      <div class="timer-buttons">
+        <button id="button-start">Start</button>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <!-- Modal -->
-    <div class="modal fade" id="settingsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Settings</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form id="modalForm">
-              <div class="form-group row">
-                <label class="col-8 col-form-label" for="x-value">X-value (0.1 >= X => 1)</label>
-                <div class="col-4">
-                  <input type="number" min="0.1" max="1" step="0.1" class="form-control" id="x-value" />
-                </div>
+  <!-- Modal -->
+  <div class="modal fade" id="settingsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="modalForm">
+            <div class="form-group row">
+              <label class="col-8 col-form-label" for="x-value">X-value (0.1 >= X => 1)</label>
+              <div class="col-4">
+                <input type="number" min="0.1" max="1" step="0.1" class="form-control" id="x-value" />
               </div>
 
               <hr>
@@ -96,56 +100,69 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="logModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Log</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <ul id="logTimings">
-            
-            
-            
-            </ul>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="modal fade" id="logModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Log</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul id="logTimings">
 
 
-    <div class="modal fade" id="aboutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">About</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <ul>
-              <li>PomoX created by <a target="_blank" href="https://yeohyuyong.github.io/">Yeoh Yu Yong</a></li>
-              <li><a target="_blank" href="https://icons8.com/icon/59719/about">About icon by Icons8</a></li>
-              <li><a target="_blank" href="https://icons8.com/icon/98027/graph">Graph icon by Icons8</a></li>
-              <li><a target="_blank" href="https://icons8.com/icon/60007/timer">Timer icon by Icons8</a></li>
-              <li><a target="_blank" href="https://icons8.com/icon/83247/gear">Gear icon by Icons8</a></li>
-            </ul>      
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
+
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <script type="module" src="js/app.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.js"></script>
-    <script src="assets/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
-  </body>
+
+  <div class="modal fade" id="aboutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">About</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul>
+            <li>PomoX created by <a target="_blank" href="https://yeohyuyong.github.io/">Yeoh Yu Yong</a></li>
+            <li><a target="_blank" href="https://icons8.com/icon/59719/about">About icon by Icons8</a></li>
+            <li><a target="_blank" href="https://icons8.com/icon/98027/graph">Graph icon by Icons8</a></li>
+            <li><a target="_blank" href="https://icons8.com/icon/60007/timer">Timer icon by Icons8</a></li>
+            <li><a target="_blank" href="https://icons8.com/icon/83247/gear">Gear icon by Icons8</a></li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function deleteLog(item) {
+      item.parentNode.parentNode.remove();
+    }
+  </script>
+  <script type="module" src="js/app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.js"></script>
+  <script src="assets/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+</body>
+
 </html>
