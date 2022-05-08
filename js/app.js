@@ -168,7 +168,7 @@ function breakTimer() {
   let secondsPassed = Math.floor(millisecondsPassed / 1000);
   if (breakDurationSeconds === 0) {
     breakNotificationSound.play();
-    document.title = "PomoX";
+    document.title = "PomoFlow";
     clearInterval(breakInterval);
   } else {
     let secondsRemaining = breakDurationSeconds - secondsPassed;
@@ -180,7 +180,7 @@ function breakTimer() {
     }
     document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
     if (secondsRemaining <= 0) {
-      document.title = "PomoX";
+      document.title = "PomoFlow";
       breakNotificationSound.play();
       clearInterval(breakInterval);
     }
