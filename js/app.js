@@ -29,8 +29,10 @@ let breakDurationSeconds;
 
 if (localStorage.autoStartTimer === undefined){
   autoStartTimerInput.checked = false
+  autoStartTimer = false
 } else {
   autoStartTimerInput.checked = localStorage.autoStartTimer === 'true';
+  autoStartTimer = autoStartTimerInput.checked;
 }
 
 autoStartTimerInput.addEventListener("change", updateAutoStart);
