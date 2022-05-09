@@ -14,14 +14,24 @@ const logTimings = document.querySelector("#logTimings");
 let startInterval;
 let breakInterval;
 let xValue;
-
+let minimumTime;
 let breakNotification;
 let breakNotificationArr;
 let timerNotification;
 let timerNotificationArr;
 let startTime;
-
 let breakDurationSeconds;
+
+
+minimumTimeInput.value = localStorage.minimumTime;
+
+minimumTimeInput.addEventListener("change", updateMinimumTime);
+
+function updateMinimumTime(e) {
+  minimumTime = e.target.value;
+  window.localStorage.setItem("minimumTime", minimumTime);
+  minimumTimeInput.value = minimumTime;
+}
 
 if (localStorage.logTimings === undefined) {
   logTimings.innerHTML = "";
