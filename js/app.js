@@ -176,7 +176,7 @@ function displayTime(minutes, seconds) {
 
 function startTimer() {
   let millisecondsPassed = Date.now() - startTime;
-  let secondsPassed = Math.floor(millisecondsPassed / 100);
+  let secondsPassed = Math.floor(millisecondsPassed / 1000);
   minutes = Math.floor(secondsPassed / 60);
   seconds = secondsPassed % 60;
   displayTime(minutes, seconds);
