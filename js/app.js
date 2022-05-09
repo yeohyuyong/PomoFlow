@@ -27,6 +27,20 @@ let timerNotificationArr;
 let startTime;
 let breakDurationSeconds;
 
+if (localStorage.autoStartTimer === undefined){
+  autoStartTimerInput.checked = false
+} else {
+  autoStartTimerInput.checked = localStorage.autoStartTimer === 'true';
+}
+
+autoStartTimerInput.addEventListener("change", updateAutoStart);
+
+function updateAutoStart() {
+  autoStartTimer = autoStartTimerInput.checked;
+  window.localStorage.setItem("autoStartTimer", autoStartTimer);
+  autoStartTimerInput.checked = autoStartTimer;
+}
+
 
 minimumTimeInput.value = localStorage.minimumTime;
 
