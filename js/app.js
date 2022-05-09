@@ -6,6 +6,7 @@ const secondsUp = document.getElementById("secondsUp");
 const minutesUp = document.getElementById("minutesUp");
 const buttonStart = document.getElementById("button-start");
 const xValueInput = document.getElementById("x-value");
+const minimumTimeInput = document.querySelector("#minimum-time");
 const timerNotificationInput = document.getElementById("timerNotification");
 const breakNotificationInput = document.getElementById("breakNotification");
 const modalForm = document.querySelector("#modalForm");
@@ -88,14 +89,26 @@ buttonStart.onclick = function () {
   if (this.textContent === "Start") {
     startTime = Date.now();
     this.textContent = "Break";
+
+    //Make break button disabled to prevent users from taking a break before minimum time is up
+    if (parseInt(minimumTimeInput.value) > 0){ //Ensure minimumTimeInput.value is set, else break button will not be disabled
+      this.setAttribute('disabled', '');
+      this.style.cursor = "not-allowed";
+    }
+
     clearInterval(breakInterval);
     seconds = 0;
     secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
     minutes = 0;
     minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
+
+    //Disable minimumTimeInput to prevent users from changing value
+    minimumTimeInput.setAttribute('disabled', '');
+
     startInterval = setInterval(startTimer, 1000);
   } else if (this.textContent === "Break") {
     this.textContent = "Start";
+    minimumTimeInput.removeAttribute('disabled');
     clearInterval(startInterval);
     createLogItem();
     calculateBreakDuration();
@@ -153,10 +166,14 @@ function displayTime(minutes, seconds) {
 
 function startTimer() {
   let millisecondsPassed = Date.now() - startTime;
-  let secondsPassed = Math.floor(millisecondsPassed / 1000);
+  let secondsPassed = Math.floor(millisecondsPassed / 100);
   minutes = Math.floor(secondsPassed / 60);
   seconds = secondsPassed % 60;
   displayTime(minutes, seconds);
+  if (minutes >= parseInt(minimumTimeInput.value)){
+    buttonStart.removeAttribute('disabled');
+    buttonStart.style.cursor = "pointer";
+  }
   if (timerNotificationArr !== undefined && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
     timerNotificationSound.play();
   }
