@@ -1,4 +1,7 @@
-import { timerNotificationSound, breakNotificationSound } from "./notification.js";
+import {
+  timerNotificationSound,
+  breakNotificationSound
+} from "./notification.js";
 
 let seconds = "00";
 let minutes = "00";
@@ -7,6 +10,7 @@ const minutesUp = document.getElementById("minutesUp");
 const buttonStart = document.getElementById("button-start");
 const xValueInput = document.getElementById("x-value");
 const minimumTimeInput = document.querySelector("#minimum-time");
+const autoStartTimerInput = document.querySelector("#auto-start-timer");
 const timerNotificationInput = document.getElementById("timerNotification");
 const breakNotificationInput = document.getElementById("breakNotification");
 const modalForm = document.querySelector("#modalForm");
@@ -15,6 +19,7 @@ let startInterval;
 let breakInterval;
 let xValue;
 let minimumTime;
+let autoStartTimer;
 let breakNotification;
 let breakNotificationArr;
 let timerNotification;
@@ -66,6 +71,15 @@ function updateXValue(e) {
   xValueInput.value = xValue;
 }
 
+
+//Auto Start Timer Input Change
+autoStartTimerInput.addEventListener("change", updateAutoStartTimer)
+
+function updateAutoStartTimer() {
+  autoStartTimer = autoStartTimerInput.checked;
+}
+
+
 // Timer notification updated
 timerNotificationInput.addEventListener("change", updateNotificationValueTimer);
 
@@ -97,25 +111,7 @@ modalForm.addEventListener("keydown", function (evt) {
 
 buttonStart.onclick = function () {
   if (this.textContent === "Start") {
-    startTime = Date.now();
-    this.textContent = "Break";
-
-    //Make break button disabled to prevent users from taking a break before minimum time is up
-    if (parseInt(minimumTimeInput.value) > 0){ //Ensure minimumTimeInput.value is set, else break button will not be disabled
-      this.setAttribute('disabled', '');
-      this.style.cursor = "not-allowed";
-    }
-
-    clearInterval(breakInterval);
-    seconds = 0;
-    secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
-    minutes = 0;
-    minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
-
-    //Disable minimumTimeInput to prevent users from changing value
-    minimumTimeInput.setAttribute('disabled', '');
-
-    startInterval = setInterval(startTimer, 1000);
+    timerStartRunning();
   } else if (this.textContent === "Break") {
     this.textContent = "Start";
     minimumTimeInput.removeAttribute('disabled');
@@ -180,7 +176,7 @@ function startTimer() {
   minutes = Math.floor(secondsPassed / 60);
   seconds = secondsPassed % 60;
   displayTime(minutes, seconds);
-  if (minutes >= parseInt(minimumTimeInput.value)){
+  if (minutes >= parseInt(minimumTimeInput.value)) {
     buttonStart.removeAttribute('disabled');
     buttonStart.style.cursor = "pointer";
   }
@@ -197,6 +193,9 @@ function breakTimer() {
     breakNotificationSound.play();
     document.title = "PomoFlow";
     clearInterval(breakInterval);
+    if (autoStartTimer) {
+      timerStartRunning();
+    }
   } else {
     let secondsRemaining = breakDurationSeconds - secondsPassed;
     minutes = Math.floor(secondsRemaining / 60);
@@ -210,6 +209,9 @@ function breakTimer() {
       document.title = "PomoFlow";
       breakNotificationSound.play();
       clearInterval(breakInterval);
+      if (autoStartTimer) {
+        timerStartRunning();
+      }
     }
   }
 }
@@ -217,20 +219,42 @@ function breakTimer() {
 //Nav button Hover effects
 
 const navButtons = document.querySelectorAll(".nav-button");
-for (let i=0;i<navButtons.length;i++){
-  navButtons[i].addEventListener("mouseover", function(){
+for (let i = 0; i < navButtons.length; i++) {
+  navButtons[i].addEventListener("mouseover", function () {
     let buttonImgs = this.children
-    for (let img of buttonImgs){
-    img.classList.toggle("img-hidden");
+    for (let img of buttonImgs) {
+      img.classList.toggle("img-hidden");
     }
-   }
-  )
+  })
 
-  navButtons[i].addEventListener("mouseout", function(){
+  navButtons[i].addEventListener("mouseout", function () {
     let buttonImgs = this.children
-    for (let img of buttonImgs){
-    img.classList.toggle("img-hidden");
+    for (let img of buttonImgs) {
+      img.classList.toggle("img-hidden");
     }
-   }
-  )
+  })
+}
+
+
+//Timer running
+function timerStartRunning() {
+  startTime = Date.now();
+  buttonStart.textContent = "Break";
+
+  //Make break button disabled to prevent users from taking a break before minimum time is up
+  if (parseInt(minimumTimeInput.value) > 0) { //Ensure minimumTimeInput.value is set, else break button will not be disabled
+    buttonStart.setAttribute('disabled', '');
+    buttonStart.style.cursor = "not-allowed";
+  }
+
+  clearInterval(breakInterval);
+  seconds = 0;
+  secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
+  minutes = 0;
+  minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
+
+  //Disable minimumTimeInput to prevent users from changing value
+  minimumTimeInput.setAttribute('disabled', '');
+
+  startInterval = setInterval(startTimer, 1000);
 }
