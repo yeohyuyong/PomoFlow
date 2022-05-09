@@ -25,9 +25,10 @@
 
         <!-- About Modal Button -->
         <div class="col-3 text-center">
-          <button type="button" class="btn nav-button" id="about-button" data-bs-toggle="modal" data-bs-target="#aboutModal">
+          <button type="button" class="btn nav-button" id="about-button" data-bs-toggle="modal"
+            data-bs-target="#aboutModal">
             <img src="https://img.icons8.com/ios-glyphs/30/ffffff/about.png" />
-            <img class="img-hidden" src="https://img.icons8.com/ios-glyphs/30/000000/about.png"/>
+            <img class="img-hidden" src="https://img.icons8.com/ios-glyphs/30/000000/about.png" />
           </button>
         </div>
 
@@ -39,15 +40,19 @@
 
         <!-- Setting and Log Modal Button -->
         <div class="col-3 text-center">
-          <button type="button" class="btn nav-button" id="log-button" data-bs-toggle="modal" data-bs-target="#logModal">
-          
-            <img src="https://img.icons8.com/material-outlined/24/ffffff/graph.png"/>
-              <img class="img-hidden" src="https://img.icons8.com/material-outlined/24/000000/graph.png"/>
-            </button>
-          <button type="button" class="btn nav-button" id="settings-button" data-bs-toggle="modal" data-bs-target="#settingsModal">
+
+          <button type="button" class="btn nav-button" id="settings-button" data-bs-toggle="modal"
+            data-bs-target="#settingsModal">
             <img src="https://img.icons8.com/material-outlined/24/ffffff/gear--v1.png" />
-            <img class="img-hidden" src="https://img.icons8.com/material-outlined/24/000000/gear--v1.png"/>
+            <img class="img-hidden" src="https://img.icons8.com/material-outlined/24/000000/gear--v1.png" />
           </button>
+
+          <button type="button" class="btn nav-button" id="log-button" data-bs-toggle="modal"
+            data-bs-target="#logModal">
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/graph.png" />
+            <img class="img-hidden" src="https://img.icons8.com/material-outlined/24/000000/graph.png" />
+          </button>
+
         </div>
       </div>
     </div>
@@ -78,6 +83,7 @@
                 <input type="number" min="0.1" max="1" step="0.1" class="form-control" id="x-value" />
               </div>
             </div>
+
             <hr>
 
             <div class="form-group row">
@@ -88,7 +94,14 @@
             </div>
 
             <hr>
+            
+            <div class="form-check form-switch">
+              <label class="form-check-label" for="auto-start-timer">Auto Start Timer</label>
+              <input class="form-check-input" type="checkbox" role="switch" id="auto-start-timer">
+            </div>
 
+            <hr>
+            
             <div class="form-group row">
               <label class="col-6 col-form-label" for="timerNotification">Timer Notifications</label>
               <div class="col-6">
