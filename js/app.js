@@ -1,6 +1,7 @@
 import {
   timerNotificationSound,
-  breakNotificationSound
+  breakNotificationSound,
+  notifyMe
 } from "./notification.js";
 
 let seconds = "00";
@@ -27,7 +28,7 @@ let timerNotificationArr;
 let startTime;
 let breakDurationSeconds;
 
-if (localStorage.autoStartTimer === undefined){
+if (localStorage.autoStartTimer === undefined) {
   autoStartTimerInput.checked = false
   autoStartTimer = false
 } else {
@@ -209,6 +210,7 @@ function breakTimer() {
     breakNotificationSound.play();
     document.title = "PomoFlow";
     clearInterval(breakInterval);
+    notifyMe();
     if (autoStartTimer) {
       timerStartRunning();
     }
@@ -221,10 +223,12 @@ function breakTimer() {
       breakNotificationSound.play();
     }
     document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
+    // When timer ends
     if (secondsRemaining <= 0) {
       document.title = "PomoFlow";
       breakNotificationSound.play();
       clearInterval(breakInterval);
+      notifyMe();
       if (autoStartTimer) {
         timerStartRunning();
       }
