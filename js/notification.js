@@ -26,7 +26,7 @@ function notifyMe() {
         if (p === 'granted') {
           // show notification here
           let notify = new Notification('Break Ended!', {
-            body: 'Please continue your work?',
+            body: 'Please continue your work',
             icon: 'https://img.icons8.com/ios/50/ffffff/timer.png',
           });
         } else {
