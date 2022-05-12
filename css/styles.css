@@ -6,6 +6,14 @@ body {
 
 main {
   height: 100vh;
+  display: flex;
+  flex-flow: column;
+}
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow : 1;
 }
 
 .wrapper {
