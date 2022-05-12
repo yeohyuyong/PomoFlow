@@ -8,12 +8,18 @@ main {
   height: 100vh;
   display: flex;
   flex-flow: column;
+  overflow: hidden;
 }
+
 section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-grow : 1;
+}
+
+#button-start {
+  margin-bottom: 10rem;
 }
 
 .wrapper {
