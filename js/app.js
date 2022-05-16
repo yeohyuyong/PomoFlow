@@ -145,10 +145,18 @@ function createLogItem() {
   let span = document.createElement("SPAN");
   let button = document.createElement("button");
   button.textContent = "\u00D7";
-  button.setAttribute("onclick", "deleteLog(this)");
+
+  //prevent "Copied to clipboard" alert msg when log is closed
+  button.addEventListener("click", function (evt) {
+    deleteLog(this)
+    evt.stopPropagation()
+  })
+  // button.setAttribute("onclick", "deleteLog(this)");
   button.classList.add("close-button");
   span.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
   span.append(button);
+  span.setAttribute("onclick", "copyToClipboard(this.textContent)");
+  span.style.cursor = "copy";
   newItem.append(span);
   logTimings.prepend(newItem);
   localStorage.logTimings = logTimings.innerHTML;
