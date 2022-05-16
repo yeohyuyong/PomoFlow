@@ -185,6 +185,14 @@
       item.parentNode.parentNode.remove();
       localStorage.logTimings = logTimings.innerHTML;
     }
+
+    function copyToClipboard(copyText) {
+      //Copy all except the close button
+      copyText = copyText.slice(0, -1)
+      navigator.clipboard.writeText(copyText).then(() => {
+        alert("Copied to clipboard");
+      });
+    }
   </script>
   <script type="module" src="js/app.js"></script>
   <script type="module" src="js/notification.js"></script>
