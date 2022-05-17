@@ -167,7 +167,7 @@ function calculateBreakDuration() {
   breakDurationSeconds = Math.ceil(timeWorkedSeconds * xValueInput.value);
   let breakMinutes = Math.floor(breakDurationSeconds / 60);
   let breakSeconds = Math.ceil(breakDurationSeconds % 60);
-  alert(`Work Time: ${minutes} minutes ${seconds} seconds \nBreak Time: ${breakMinutes} minutes ${breakSeconds} seconds `);
+  // alert(`Work Time: ${minutes} minutes ${seconds} seconds \nBreak Time: ${breakMinutes} minutes ${breakSeconds} seconds `);
   seconds = breakSeconds;
   minutes = breakMinutes;
   displayTime(minutes, seconds);
