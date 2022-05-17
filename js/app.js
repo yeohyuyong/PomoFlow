@@ -146,10 +146,10 @@ function createLogItem() {
   let button = document.createElement("button");
   button.textContent = "\u00D7";
 
-  //prevent "Copied to clipboard" alert msg when log is closed
+  //Delete log item when close button is clicked
   button.addEventListener("click", function (evt) {
     deleteLog(this)
-    evt.stopPropagation()
+    evt.stopPropagation()  //prevents copying to clipboard when close button is clicked
   })
   // button.setAttribute("onclick", "deleteLog(this)");
   button.classList.add("close-button");
