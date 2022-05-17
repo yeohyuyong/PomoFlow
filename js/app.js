@@ -151,7 +151,7 @@ function createLogItem() {
     deleteLog(this)
     evt.stopPropagation()  //prevents copying to clipboard when close button is clicked
   })
-  // button.setAttribute("onclick", "deleteLog(this)");
+  button.setAttribute("onclick", "deleteLog(this)"); //allow log item to be deleted after page refresh
   button.classList.add("close-button");
   span.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
   span.append(button);
