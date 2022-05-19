@@ -1,99 +1,99 @@
 body {
-  background: #141414;
-  font-family: "Azeret Mono", monospace;
-  height: 100%;
+	background: #141414;
+	font-family: 'Azeret Mono', monospace;
+	height: 100%;
 }
 
 main {
-  height: 100vh;
-  display: flex;
-  flex-flow: column;
-  overflow: hidden;
+	height: 100vh;
+	display: flex;
+	flex-flow: column;
+	overflow: hidden;
 }
 
 section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow : 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex-grow: 1;
 }
 
 #button-start {
-  margin-bottom: 10rem;
+	margin-bottom: 10rem;
 }
 
 .wrapper {
-  width: 800px;
-  margin: 30px auto;
-  color: #f3f3f3;
-  text-align: center;
-  vertical-align: center;
+	width: 800px;
+	margin: 30px auto;
+	color: #f3f3f3;
+	text-align: center;
+	vertical-align: center;
 }
 
 #navbar {
-  background-color: #1b1b1b;
-  height: 5rem;
+	background-color: #1b1b1b;
+	height: 5rem;
 }
 
 #navbar-title {
-  font-size: 3rem;
+	font-size: 3rem;
 }
 
 .timerText {
-  font-size: 10rem;
+	font-size: 10rem;
 }
 
 #settings-button,
 #log-button,
 #about-button {
-  border: 0.2rem solid #f3f3f3;
-  color: #f3f3f3;
+	border: 0.2rem solid #f3f3f3;
+	color: #f3f3f3;
 }
 
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus,
 #notification-time {
-  box-shadow: none !important;
+	box-shadow: none !important;
 }
 
 .timer-buttons button {
-  color: #f3f3f3;
-  font-size: 2.5rem;
-  letter-spacing: 0.04rem;
-  padding: 1rem 2rem;
-  margin: 1rem;
-  cursor: pointer;
-  border-radius: 0.4rem;
-  border: 0.3rem solid #f3f3f3;
-  background: none;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 3px 0 0 #141414;
-  transition: all 0.25s;
+	color: #f3f3f3;
+	font-size: 2.5rem;
+	letter-spacing: 0.04rem;
+	padding: 1rem 2rem;
+	margin: 1rem;
+	cursor: pointer;
+	border-radius: 0.4rem;
+	border: 0.3rem solid #f3f3f3;
+	background: none;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 3px 0 0 #141414;
+	transition: all 0.25s;
 }
 
 .timer-buttons button:active,
 #settings-button:active {
-  top: 3px;
-  box-shadow: none;
+	top: 3px;
+	box-shadow: none;
 }
 
 .timer-buttons button:hover,
 #settings-button:hover,
 #log-button:hover,
 #about-button:hover {
-  border-color: #141414 !important;
-  background: #f3f3f3 !important;
-  color: #141414 !important;
+	border-color: #141414 !important;
+	background: #f3f3f3 !important;
+	color: #141414 !important;
 }
 
 .close-button {
-  outline:none;
-  border: none;
-  background-color: white;
+	outline: none;
+	border: none;
+	background-color: white;
 }
 
 .img-hidden {
-  display:none;
+	display: none;
 }
