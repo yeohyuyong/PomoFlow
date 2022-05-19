@@ -24,7 +24,7 @@ let timerNotificationArr;
 let startTime;
 let breakDurationSeconds;
 
-if (localStorage.autoStartTimer === undefined) {
+if (!localStorage.autoStartTimer) {
 	autoStartTimerInput.checked = false;
 	autoStartTimer = false;
 } else {
@@ -37,7 +37,6 @@ autoStartTimerInput.addEventListener('change', updateAutoStart);
 function updateAutoStart() {
 	autoStartTimer = autoStartTimerInput.checked;
 	window.localStorage.setItem('autoStartTimer', autoStartTimer);
-	autoStartTimerInput.checked = autoStartTimer;
 }
 
 minimumTimeInput.value = localStorage.minimumTime;
@@ -50,7 +49,7 @@ function updateMinimumTime(e) {
 	minimumTimeInput.value = minimumTime;
 }
 
-if (localStorage.logTimings === undefined) {
+if (!localStorage.logTimings) {
 	logTimings.innerHTML = '';
 } else {
 	logTimings.innerHTML = localStorage.logTimings;
@@ -58,7 +57,7 @@ if (localStorage.logTimings === undefined) {
 
 xValueInput.value = localStorage.xValue;
 
-if (localStorage.timerNotification === undefined) {
+if (!localStorage.timerNotification) {
 	timerNotificationInput.value = '';
 } else {
 	timerNotificationInput.value = localStorage.timerNotification;
@@ -66,7 +65,7 @@ if (localStorage.timerNotification === undefined) {
 	timerNotificationArr = timerNotificationArr.map((time) => parseInt(time));
 }
 
-if (localStorage.breakNotification === undefined) {
+if (!localStorage.breakNotification) {
 	breakNotificationInput.value = '';
 } else {
 	breakNotificationInput.value = localStorage.breakNotification;
@@ -168,24 +167,12 @@ function calculateBreakDuration() {
 }
 
 function displayMinutesOrSeconds(time) {
-	if (time <= 9) {
-		return '0' + time;
-	} else {
-		return time;
-	}
+	return time <= 9 ? '0' + time : time;
 }
 
 function displayTime(minutes, seconds) {
-	if (minutes <= 9) {
-		minutesUp.innerHTML = '0' + minutes;
-	} else {
-		minutesUp.innerHTML = minutes;
-	}
-	if (seconds <= 9) {
-		secondsUp.innerHTML = '0' + seconds;
-	} else {
-		secondsUp.innerHTML = seconds;
-	}
+	minutesUp.innerHTML = minutes <= 9 ? '0' + minutes : minutes;
+	secondsUp.innerHTML = seconds <= 9 ? '0' + seconds : seconds;
 }
 
 function startTimer() {
@@ -270,12 +257,9 @@ function timerStartRunning() {
 
 	clearInterval(breakInterval);
 	seconds = 0;
-	secondsUp.innerHTML = displayMinutesOrSeconds(seconds);
 	minutes = 0;
-	minutesUp.innerHTML = displayMinutesOrSeconds(minutes);
 
 	//Disable minimumTimeInput to prevent users from changing value
 	minimumTimeInput.setAttribute('disabled', '');
-
 	startInterval = setInterval(startTimer, 1000);
 }
