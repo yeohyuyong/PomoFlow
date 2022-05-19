@@ -1,11 +1,11 @@
 {
-    "name": "PomoFlow",
-    "version": "1.0.0",
-    "description": "Advanced Pomodoro Timer",
-    "manifest_version": 3,
-    "author": "Yeoh Yu Yong",
-    "action":{
-        "default_popup": "index.html",
-        "default_title": "PomoFlow"
-    }
+	"name": "PomoFlow",
+	"version": "1.0.0",
+	"description": "Advanced Pomodoro Timer",
+	"manifest_version": 3,
+	"author": "Yeoh Yu Yong",
+	"action": {
+		"default_popup": "index.html",
+		"default_title": "PomoFlow"
+	}
 }
