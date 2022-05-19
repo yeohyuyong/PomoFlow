@@ -123,4 +123,8 @@ section {
 	ul.navbar-nav {
 		padding: 2rem 0;
 	}
+
+	.modal {
+		font-size: 1.3rem;
+	}
 }
