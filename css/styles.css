@@ -109,7 +109,13 @@ section {
 	display: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 992px) {
+	ul.navbar-nav {
+		padding: 1rem 0;
+	}
+}
+
+@media (max-width: 576px) {
 	html {
 		font-size: 10px;
 	}
