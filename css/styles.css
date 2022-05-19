@@ -113,4 +113,8 @@ section {
 	html {
 		font-size: 10px;
 	}
+
+	ul.navbar-nav {
+		padding: 2rem 0;
+	}
 }
