@@ -126,5 +126,8 @@ section {
 
 	.modal {
 		font-size: 1.3rem;
+
+	.modal-title {
+		font-size: 2rem;
 	}
 }
