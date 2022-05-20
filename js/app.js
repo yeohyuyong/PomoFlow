@@ -263,3 +263,14 @@ function timerStartRunning() {
 	minimumTimeInput.setAttribute('disabled', '');
 	startInterval = setInterval(startTimer, 1000);
 }
+
+//Extend break buttons
+
+const extendBreakButtons = document.querySelectorAll('#extend-break-modal .extend-break');
+
+for (let button of extendBreakButtons) {
+	button.addEventListener('click', function () {
+		let extraMinute = this.textContent.split(' ')[0];
+		breakDurationSeconds += parseInt(extraMinute) * 60;
+	});
+}
