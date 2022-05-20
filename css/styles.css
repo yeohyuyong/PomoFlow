@@ -59,6 +59,8 @@ section {
 #about-button {
 	border: 0.2rem solid var(--white);
 	color: var(--white);
+	border-radius: 50%;
+	padding: 0.7rem;
 }
 
 .btn:focus,
@@ -109,12 +111,26 @@ section {
 	display: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 992px) {
+	ul.navbar-nav {
+		padding: 1rem 0;
+	}
+}
+
+@media (max-width: 576px) {
 	html {
 		font-size: 10px;
 	}
 
 	ul.navbar-nav {
 		padding: 2rem 0;
+	}
+
+	.modal {
+		font-size: 1.7rem;
+	}
+
+	.modal-title {
+		font-size: 2rem;
 	}
 }
