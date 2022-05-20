@@ -55,6 +55,7 @@ section {
 	font-size: 10rem;
 }
 
+#extend-break-button,
 #settings-button,
 #log-button,
 #about-button {
@@ -94,6 +95,7 @@ section {
 }
 
 .timer-buttons button:hover,
+#extend-break-button:hover,
 #settings-button:hover,
 #log-button:hover,
 #about-button:hover {
