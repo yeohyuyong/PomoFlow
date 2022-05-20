@@ -59,6 +59,8 @@ section {
 #about-button {
 	border: 0.2rem solid var(--white);
 	color: var(--white);
+	border-radius: 50%;
+	padding: 0.7rem;
 }
 
 .btn:focus,
