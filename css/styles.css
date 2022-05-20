@@ -114,6 +114,10 @@ section {
 	display: none;
 }
 
+.modal-invisible {
+	visibility: hidden;
+}
+
 @media (max-width: 992px) {
 	ul.navbar-nav {
 		padding: 1rem 0;
@@ -136,6 +140,8 @@ section {
 	.modal-title {
 		font-size: 2rem;
 	}
+
+	#extend-break-button,
 	#settings-button,
 	#log-button,
 	#about-button {
