@@ -12,6 +12,7 @@ const timerNotificationInput = document.getElementById('timerNotification');
 const breakNotificationInput = document.getElementById('breakNotification');
 const modalForm = document.querySelector('#modalForm');
 const logTimings = document.querySelector('#logTimings');
+const extendBreakModalButton = document.querySelector('#extend-break-button');
 let startInterval;
 let breakInterval;
 let xValue;
@@ -192,6 +193,7 @@ function startTimer() {
 }
 
 function breakTimer() {
+	extendBreakModalButton.classList.remove('modal-invisible');
 	let millisecondsPassed = Date.now() - startTime;
 	let secondsPassed = Math.floor(millisecondsPassed / 1000);
 	if (breakDurationSeconds === 0) {
@@ -254,7 +256,7 @@ function timerStartRunning() {
 		buttonStart.setAttribute('disabled', '');
 		buttonStart.style.cursor = 'not-allowed';
 	}
-
+	extendBreakModalButton.classList.add('modal-invisible');
 	clearInterval(breakInterval);
 	seconds = 0;
 	minutes = 0;
@@ -262,4 +264,15 @@ function timerStartRunning() {
 	//Disable minimumTimeInput to prevent users from changing value
 	minimumTimeInput.setAttribute('disabled', '');
 	startInterval = setInterval(startTimer, 1000);
+}
+
+//Extend break buttons
+
+const extendBreakButtons = document.querySelectorAll('#extend-break-modal .extend-break');
+
+for (let button of extendBreakButtons) {
+	button.addEventListener('click', function () {
+		let extraMinute = this.textContent.split(' ')[0];
+		breakDurationSeconds += parseInt(extraMinute) * 60;
+	});
 }
