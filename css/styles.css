@@ -85,7 +85,7 @@ section {
 	position: relative;
 	overflow: hidden;
 	box-shadow: 0 3px 0 0 var(--black);
-	transition: all 0.25s;
+	transition: all 0.1s;
 }
 
 .timer-buttons button:active,
