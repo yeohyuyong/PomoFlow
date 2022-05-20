@@ -133,4 +133,9 @@ section {
 	.modal-title {
 		font-size: 2rem;
 	}
+	#settings-button,
+	#log-button,
+	#about-button {
+		padding: 1.5rem;
+	}
 }
