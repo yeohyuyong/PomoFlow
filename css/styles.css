@@ -118,6 +118,12 @@ section {
 	visibility: hidden;
 }
 
+.extend-break {
+	height: 50%;
+	width: 30%;
+	margin: 0.5rem 0.3rem;
+}
+
 @media (max-width: 992px) {
 	ul.navbar-nav {
 		padding: 1rem 0;
