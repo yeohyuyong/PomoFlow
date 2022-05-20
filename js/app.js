@@ -126,6 +126,7 @@ buttonStart.onclick = function () {
 		this.textContent = 'Start';
 		minimumTimeInput.removeAttribute('disabled');
 		clearInterval(startInterval);
+		extendBreakModalButton.classList.remove('modal-invisible');
 		createLogItem();
 		calculateBreakDuration();
 		startTime = Date.now();
@@ -193,13 +194,13 @@ function startTimer() {
 }
 
 function breakTimer() {
-	extendBreakModalButton.classList.remove('modal-invisible');
 	let millisecondsPassed = Date.now() - startTime;
 	let secondsPassed = Math.floor(millisecondsPassed / 1000);
 	if (breakDurationSeconds === 0) {
 		breakNotificationSound.play();
 		document.title = 'PomoFlow';
 		clearInterval(breakInterval);
+		extendBreakModalButton.classList.add('modal-invisible');
 		notifyMe();
 		if (autoStartTimer) {
 			timerStartRunning();
@@ -218,6 +219,7 @@ function breakTimer() {
 			document.title = 'PomoFlow';
 			breakNotificationSound.play();
 			clearInterval(breakInterval);
+			extendBreakModalButton.classList.add('modal-invisible');
 			notifyMe();
 			if (autoStartTimer) {
 				timerStartRunning();
@@ -256,8 +258,9 @@ function timerStartRunning() {
 		buttonStart.setAttribute('disabled', '');
 		buttonStart.style.cursor = 'not-allowed';
 	}
-	extendBreakModalButton.classList.add('modal-invisible');
+
 	clearInterval(breakInterval);
+	extendBreakModalButton.classList.add('modal-invisible');
 	seconds = 0;
 	minutes = 0;
 
