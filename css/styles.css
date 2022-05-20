@@ -48,6 +48,7 @@ section {
 
 .navbar {
 	background-color: var(--grey);
+	padding: 1rem 0;
 }
 
 .timerText {
@@ -137,5 +138,9 @@ section {
 	#log-button,
 	#about-button {
 		padding: 1.5rem;
+	}
+
+	.navbar {
+		padding: 2.5rem 0;
 	}
 }
