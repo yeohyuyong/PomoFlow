@@ -12,6 +12,7 @@ const timerNotificationInput = document.getElementById('timerNotification');
 const breakNotificationInput = document.getElementById('breakNotification');
 const modalForm = document.querySelector('#modalForm');
 const logTimings = document.querySelector('#logTimings');
+const extendBreakModalButton = document.querySelector('#extend-break-button');
 let startInterval;
 let breakInterval;
 let xValue;
@@ -125,6 +126,7 @@ buttonStart.onclick = function () {
 		this.textContent = 'Start';
 		minimumTimeInput.removeAttribute('disabled');
 		clearInterval(startInterval);
+		extendBreakModalButton.classList.remove('modal-invisible');
 		createLogItem();
 		calculateBreakDuration();
 		startTime = Date.now();
@@ -182,8 +184,8 @@ function startTimer() {
 	seconds = secondsPassed % 60;
 	displayTime(minutes, seconds);
 	if (minutes >= parseInt(minimumTimeInput.value)) {
-		buttonStart.removeAttribute('disabled');
-		buttonStart.style.cursor = 'pointer';
+		//Once timer passes minimum time, break button become visible again
+		buttonStart.style.visibility = 'visible';
 	}
 	if (timerNotificationArr !== undefined && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
 		timerNotificationSound.play();
@@ -198,6 +200,7 @@ function breakTimer() {
 		breakNotificationSound.play();
 		document.title = 'PomoFlow';
 		clearInterval(breakInterval);
+		extendBreakModalButton.classList.add('modal-invisible');
 		notifyMe();
 		if (autoStartTimer) {
 			timerStartRunning();
@@ -216,6 +219,7 @@ function breakTimer() {
 			document.title = 'PomoFlow';
 			breakNotificationSound.play();
 			clearInterval(breakInterval);
+			extendBreakModalButton.classList.add('modal-invisible');
 			notifyMe();
 			if (autoStartTimer) {
 				timerStartRunning();
@@ -251,15 +255,28 @@ function timerStartRunning() {
 	//Make break button disabled to prevent users from taking a break before minimum time is up
 	if (parseInt(minimumTimeInput.value) > 0) {
 		//Ensure minimumTimeInput.value is set, else break button will not be disabled
-		buttonStart.setAttribute('disabled', '');
-		buttonStart.style.cursor = 'not-allowed';
+
+		//Hide break button if minimum time not reached
+		buttonStart.style.visibility = 'hidden';
 	}
 
 	clearInterval(breakInterval);
+	extendBreakModalButton.classList.add('modal-invisible');
 	seconds = 0;
 	minutes = 0;
 
 	//Disable minimumTimeInput to prevent users from changing value
 	minimumTimeInput.setAttribute('disabled', '');
 	startInterval = setInterval(startTimer, 1000);
+}
+
+//Extend break buttons
+
+const extendBreakButtons = document.querySelectorAll('#extend-break-modal .extend-break');
+
+for (let button of extendBreakButtons) {
+	button.addEventListener('click', function () {
+		let extraMinute = this.textContent.split(' ')[0];
+		breakDurationSeconds += parseInt(extraMinute) * 60;
+	});
 }

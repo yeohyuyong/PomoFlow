@@ -44,7 +44,17 @@
           <ul class="navbar-nav w-100 d-flex flex-row justify-content-around">
 
             <li class="nav-item">
-              <button type="button" class="btn nav-button" id="settings-button" data-bs-toggle="modal"
+              <button type="button" class="btn nav-button modal-buttons modal-invisible" id="extend-break-button"
+                data-bs-toggle="modal" data-bs-target="#extend-break-modal">
+                <img
+                  src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/30/ffffff/external-glyph-shapes-tanah-basah-glyph-tanah-basah-45.png" />
+                <img class="img-hidden"
+                  src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/30/000000/external-glyph-shapes-tanah-basah-glyph-tanah-basah-45.png" />
+              </button>
+            </li>
+
+            <li class="nav-item">
+              <button type="button" class="btn nav-button modal-buttons" id="settings-button" data-bs-toggle="modal"
                 data-bs-target="#settingsModal">
                 <img src="https://img.icons8.com/material-outlined/30/ffffff/gear--v1.png" />
                 <img class="img-hidden" src="https://img.icons8.com/material-outlined/30/000000/gear--v1.png" />
@@ -52,7 +62,7 @@
             </li>
 
             <li class="nav-item">
-              <button type="button" class="btn nav-button" id="log-button" data-bs-toggle="modal"
+              <button type="button" class="btn nav-button modal-buttons" id="log-button" data-bs-toggle="modal"
                 data-bs-target="#logModal">
                 <img src="https://img.icons8.com/material-outlined/30/ffffff/graph.png" />
                 <img class="img-hidden" src="https://img.icons8.com/material-outlined/30/000000/graph.png" />
@@ -60,7 +70,7 @@
             </li>
 
             <li class="nav-item">
-              <button type="button" class="btn nav-button" id="about-button" data-bs-toggle="modal"
+              <button type="button" class="btn nav-button modal-buttons" id="about-button" data-bs-toggle="modal"
                 data-bs-target="#aboutModal">
                 <img src="https://img.icons8.com/ios-glyphs/30/ffffff/about.png" />
                 <img class="img-hidden" src="https://img.icons8.com/ios-glyphs/30/000000/about.png" />
@@ -88,7 +98,41 @@
   </main>
 
   <!-- Modal -->
-  <div class="modal fade" id="settingsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+
+  <div class="modal" id="extend-break-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Extend Break</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="d-flex flex-row flex-wrap justify-content-around">
+            <button type="button" class="btn btn-outline-dark extend-break" data-bs-dismiss="modal">1
+              Minute</button>
+            <button type="button" class="btn btn-outline-dark extend-break" data-bs-dismiss="modal">2
+              Minutes</button>
+            <button type="button" class="btn btn-outline-dark extend-break" data-bs-dismiss="modal">3
+              Minutes</button>
+            <button type="button" class="btn btn-outline-dark extend-break" data-bs-dismiss="modal">5
+              Minutes</button>
+            <button type="button" class="btn btn-outline-dark extend-break" data-bs-dismiss="modal">10
+              Minutes</button>
+            <button type="button" class="btn btn-outline-dark extend-break" data-bs-dismiss="modal">15
+              Minutes</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal" id="settingsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -150,7 +194,7 @@
   </div>
   </div>
 
-  <div class="modal fade" id="logModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <div class="modal" id="logModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -173,7 +217,7 @@
   </div>
 
 
-  <div class="modal fade" id="aboutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <div class="modal" id="aboutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
