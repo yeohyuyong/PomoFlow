@@ -10,4 +10,12 @@ function displayTime(minutes, seconds) {
 	secondsUp.innerHTML = seconds <= 9 ? '0' + seconds : seconds;
 }
 
-export { displayMinutesOrSeconds, displayTime };
+function displayTitle(status) {
+	if (status === 'break') {
+		document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
+	} else if (status === 'work') {
+		document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for Work!`;
+	}
+}
+
+export { displayMinutesOrSeconds, displayTime, displayTitle };

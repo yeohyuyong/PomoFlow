@@ -1,11 +1,9 @@
 import { timerNotificationSound, breakNotificationSound, notifyMe } from './notification.js';
 import { timerNotificationArr, breakNotificationArr } from './localStorage.js';
-import { displayMinutesOrSeconds, displayTime } from './calculations.js';
+import { displayMinutesOrSeconds, displayTime, displayTitle } from './calculations.js';
 
 let seconds = '00';
 let minutes = '00';
-const secondsUp = document.getElementById('secondsUp');
-const minutesUp = document.getElementById('minutesUp');
 const buttonStart = document.getElementById('button-start');
 const xValueInput = document.getElementById('x-value');
 const minimumTimeInput = document.querySelector('#minimum-time');
@@ -62,8 +60,7 @@ function calculateBreakDuration() {
 	// alert(`Work Time: ${minutes} minutes ${seconds} seconds \nBreak Time: ${breakMinutes} minutes ${breakSeconds} seconds `);
 	seconds = breakSeconds;
 	minutes = breakMinutes;
-	displayTime(minutes, seconds);
-	document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
+	displayTitle('break');
 }
 
 function startTimer() {
@@ -79,7 +76,7 @@ function startTimer() {
 	if (timerNotificationArr !== undefined && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
 		timerNotificationSound.play();
 	}
-	document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for Work!`;
+	displayTitle('work');
 }
 
 function breakTimer() {
@@ -102,7 +99,7 @@ function breakTimer() {
 		if (breakNotificationArr !== undefined && breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
 			breakNotificationSound.play();
 		}
-		document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
+		displayTitle('break');
 		// When timer ends
 		if (secondsRemaining <= 0) {
 			document.title = 'PomoFlow';
