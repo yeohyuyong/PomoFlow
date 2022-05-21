@@ -1,4 +1,6 @@
 import { timerNotificationSound, breakNotificationSound, notifyMe } from './notification.js';
+import { timerNotificationArr, breakNotificationArr } from './localStorage.js';
+import { displayMinutesOrSeconds, displayTime } from './calculations.js';
 
 let seconds = '00';
 let minutes = '00';
@@ -12,8 +14,6 @@ const extendBreakModalButton = document.querySelector('#extend-break-button');
 let startInterval;
 let breakInterval;
 
-let breakNotificationArr;
-let timerNotificationArr;
 let startTime;
 let breakDurationSeconds;
 
@@ -64,15 +64,6 @@ function calculateBreakDuration() {
 	minutes = breakMinutes;
 	displayTime(minutes, seconds);
 	document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
-}
-
-function displayMinutesOrSeconds(time) {
-	return time <= 9 ? '0' + time : time;
-}
-
-function displayTime(minutes, seconds) {
-	minutesUp.innerHTML = minutes <= 9 ? '0' + minutes : minutes;
-	secondsUp.innerHTML = seconds <= 9 ? '0' + seconds : seconds;
 }
 
 function startTimer() {

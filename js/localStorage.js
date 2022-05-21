@@ -84,3 +84,5 @@ breakNotificationInput.addEventListener('change', (e) => {
 	breakNotificationArr = breakNotification.split(',');
 	breakNotificationArr = breakNotificationArr.map((time) => parseInt(time));
 });
+
+export { timerNotificationArr, breakNotificationArr };
