@@ -1,5 +1,5 @@
 import { timerNotificationSound, breakNotificationSound, notifyMe } from './notification.js';
-import { timerNotificationArr, breakNotificationArr } from './localStorage.js';
+import { timerNotificationArr, breakNotificationArr, autoStartTimer } from './localStorage.js';
 import { displayMinutesOrSeconds, displayTime, displayTitle } from './calculations.js';
 
 let seconds = '00';

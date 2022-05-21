@@ -43,7 +43,7 @@ if (!localStorage.logTimings) {
 }
 
 // Localstorage for X-value
-xValueInput.value = localStorage.xValue;
+xValueInput.value = localStorage.xValue || 5;
 
 xValueInput.addEventListener('change', (e) => {
 	xValue = parseFloat(e.target.value);
@@ -85,4 +85,4 @@ breakNotificationInput.addEventListener('change', (e) => {
 	breakNotificationArr = breakNotificationArr.map((time) => parseInt(time));
 });
 
-export { timerNotificationArr, breakNotificationArr };
+export { timerNotificationArr, breakNotificationArr, autoStartTimer };
