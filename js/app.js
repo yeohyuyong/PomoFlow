@@ -184,8 +184,8 @@ function startTimer() {
 	seconds = secondsPassed % 60;
 	displayTime(minutes, seconds);
 	if (minutes >= parseInt(minimumTimeInput.value)) {
-		buttonStart.removeAttribute('disabled');
-		buttonStart.style.cursor = 'pointer';
+		//Once timer passes minimum time, break button become visible again
+		buttonStart.style.visibility = 'visible';
 	}
 	if (timerNotificationArr !== undefined && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
 		timerNotificationSound.play();
@@ -255,8 +255,9 @@ function timerStartRunning() {
 	//Make break button disabled to prevent users from taking a break before minimum time is up
 	if (parseInt(minimumTimeInput.value) > 0) {
 		//Ensure minimumTimeInput.value is set, else break button will not be disabled
-		buttonStart.setAttribute('disabled', '');
-		buttonStart.style.cursor = 'not-allowed';
+
+		//Hide break button if minimum time not reached
+		buttonStart.style.visibility = 'hidden';
 	}
 
 	clearInterval(breakInterval);
