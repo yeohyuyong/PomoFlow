@@ -132,6 +132,10 @@ section {
 	box-shadow: none;
 }
 
+input[type='checkbox']:hover {
+	box-shadow: none;
+}
+
 @media (max-width: 992px) {
 	ul.navbar-nav {
 		padding: 1rem 0;
