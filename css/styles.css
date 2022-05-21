@@ -124,6 +124,10 @@ section {
 	margin: 0.5rem 0.3rem;
 }
 
+.form-control:focus {
+	box-shadow: none;
+}
+
 @media (max-width: 992px) {
 	ul.navbar-nav {
 		padding: 1rem 0;
