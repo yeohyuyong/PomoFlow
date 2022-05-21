@@ -124,6 +124,10 @@ section {
 	margin: 0.5rem 0.3rem;
 }
 
+.modal-header button:focus {
+	box-shadow: none;
+}
+
 .form-control:focus {
 	box-shadow: none;
 }
