@@ -1,4 +1,6 @@
 import { timerNotificationSound, breakNotificationSound, notifyMe } from './notification.js';
+import { timerNotificationArr, breakNotificationArr } from './localStorage.js';
+import { displayMinutesOrSeconds, displayTime } from './calculations.js';
 
 let seconds = '00';
 let minutes = '00';
@@ -7,117 +9,13 @@ const minutesUp = document.getElementById('minutesUp');
 const buttonStart = document.getElementById('button-start');
 const xValueInput = document.getElementById('x-value');
 const minimumTimeInput = document.querySelector('#minimum-time');
-const autoStartTimerInput = document.querySelector('#auto-start-timer');
-const timerNotificationInput = document.getElementById('timerNotification');
-const breakNotificationInput = document.getElementById('breakNotification');
-const modalForm = document.querySelector('#modalForm');
 const logTimings = document.querySelector('#logTimings');
 const extendBreakModalButton = document.querySelector('#extend-break-button');
 let startInterval;
 let breakInterval;
-let xValue;
-let minimumTime;
-let autoStartTimer;
-let breakNotification;
-let breakNotificationArr;
-let timerNotification;
-let timerNotificationArr;
+
 let startTime;
 let breakDurationSeconds;
-
-if (!localStorage.autoStartTimer) {
-	autoStartTimerInput.checked = false;
-	autoStartTimer = false;
-} else {
-	autoStartTimerInput.checked = localStorage.autoStartTimer === 'true';
-	autoStartTimer = autoStartTimerInput.checked;
-}
-
-autoStartTimerInput.addEventListener('change', updateAutoStart);
-
-function updateAutoStart() {
-	autoStartTimer = autoStartTimerInput.checked;
-	window.localStorage.setItem('autoStartTimer', autoStartTimer);
-}
-
-minimumTimeInput.value = localStorage.minimumTime;
-
-minimumTimeInput.addEventListener('change', updateMinimumTime);
-
-function updateMinimumTime(e) {
-	minimumTime = e.target.value;
-	window.localStorage.setItem('minimumTime', minimumTime);
-	minimumTimeInput.value = minimumTime;
-}
-
-if (!localStorage.logTimings) {
-	logTimings.innerHTML = '';
-} else {
-	logTimings.innerHTML = localStorage.logTimings;
-}
-
-xValueInput.value = localStorage.xValue;
-
-if (!localStorage.timerNotification) {
-	timerNotificationInput.value = '';
-} else {
-	timerNotificationInput.value = localStorage.timerNotification;
-	timerNotificationArr = timerNotificationInput.value.split(',');
-	timerNotificationArr = timerNotificationArr.map((time) => parseInt(time));
-}
-
-if (!localStorage.breakNotification) {
-	breakNotificationInput.value = '';
-} else {
-	breakNotificationInput.value = localStorage.breakNotification;
-	breakNotificationArr = breakNotificationInput.value.split(',');
-	breakNotificationArr = breakNotificationArr.map((time) => parseInt(time));
-}
-
-// X-Value change
-xValueInput.addEventListener('change', updateXValue);
-
-function updateXValue(e) {
-	xValue = parseFloat(e.target.value);
-	window.localStorage.setItem('xValue', xValue);
-	xValueInput.value = xValue;
-}
-
-//Auto Start Timer Input Change
-autoStartTimerInput.addEventListener('change', updateAutoStartTimer);
-
-function updateAutoStartTimer() {
-	autoStartTimer = autoStartTimerInput.checked;
-}
-
-// Timer notification updated
-timerNotificationInput.addEventListener('change', updateNotificationValueTimer);
-
-function updateNotificationValueTimer(e) {
-	timerNotification = e.target.value;
-	window.localStorage.setItem('timerNotification', timerNotification);
-	timerNotificationInput.value = timerNotification;
-	timerNotificationArr = timerNotification.split(',');
-	timerNotificationArr = timerNotificationArr.map((time) => parseInt(time));
-}
-
-// Break notification updated
-breakNotificationInput.addEventListener('change', updateNotificationValueBreak);
-
-function updateNotificationValueBreak(e) {
-	breakNotification = e.target.value;
-	window.localStorage.setItem('breakNotification', breakNotification);
-	breakNotificationInput.value = breakNotification;
-	breakNotificationArr = breakNotification.split(',');
-	breakNotificationArr = breakNotificationArr.map((time) => parseInt(time));
-}
-
-// Prevent users from pressing enter to submit modal forms
-modalForm.addEventListener('keydown', function (evt) {
-	if (evt.keyCode === 13) {
-		evt.preventDefault();
-	}
-});
 
 buttonStart.onclick = function () {
 	if (this.textContent === 'Start') {
@@ -166,15 +64,6 @@ function calculateBreakDuration() {
 	minutes = breakMinutes;
 	displayTime(minutes, seconds);
 	document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
-}
-
-function displayMinutesOrSeconds(time) {
-	return time <= 9 ? '0' + time : time;
-}
-
-function displayTime(minutes, seconds) {
-	minutesUp.innerHTML = minutes <= 9 ? '0' + minutes : minutes;
-	secondsUp.innerHTML = seconds <= 9 ? '0' + seconds : seconds;
 }
 
 function startTimer() {
@@ -228,25 +117,6 @@ function breakTimer() {
 	}
 }
 
-//Nav button Hover effects
-
-const navButtons = document.querySelectorAll('.nav-button');
-for (let i = 0; i < navButtons.length; i++) {
-	navButtons[i].addEventListener('mouseover', function () {
-		let buttonImgs = this.children;
-		for (let img of buttonImgs) {
-			img.classList.toggle('img-hidden');
-		}
-	});
-
-	navButtons[i].addEventListener('mouseout', function () {
-		let buttonImgs = this.children;
-		for (let img of buttonImgs) {
-			img.classList.toggle('img-hidden');
-		}
-	});
-}
-
 //Timer running
 function timerStartRunning() {
 	startTime = Date.now();
@@ -271,6 +141,7 @@ function timerStartRunning() {
 }
 
 //Extend break buttons
+//Break extends by X minute depending on the button clicked
 
 const extendBreakButtons = document.querySelectorAll('#extend-break-modal .extend-break');
 
