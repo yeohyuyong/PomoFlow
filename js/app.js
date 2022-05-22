@@ -18,7 +18,7 @@ let breakDurationSeconds;
 
 buttonStart.onclick = function () {
 	if (this.textContent === 'Start') {
-		timerStartRunning();
+		startTimerLoop();
 	} else if (this.textContent === 'Break') {
 		clearInterval(startInterval);
 		this.textContent = 'Start';
@@ -32,7 +32,7 @@ buttonStart.onclick = function () {
 };
 
 //Timer running
-function timerStartRunning() {
+function startTimerLoop() {
 	startTime = Date.now();
 	clearInterval(breakInterval);
 	buttonStart.textContent = 'Break';
@@ -66,7 +66,7 @@ function breakTimer() {
 		extendBreakModalButton.classList.add('modal-invisible');
 		notifyMe();
 		if (autoStartTimer) {
-			timerStartRunning();
+			startTimerLoop();
 		}
 	} else {
 		let secondsRemaining = breakDurationSeconds - secondsPassed;
@@ -85,7 +85,7 @@ function breakTimer() {
 			extendBreakModalButton.classList.add('modal-invisible');
 			notifyMe();
 			if (autoStartTimer) {
-				timerStartRunning();
+				startTimerLoop();
 			}
 		}
 	}
