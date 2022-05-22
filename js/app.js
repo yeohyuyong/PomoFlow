@@ -1,6 +1,7 @@
 import { timerNotificationSound, breakNotificationSound, notifyMe } from './notification.js';
 import { timerNotificationArr, breakNotificationArr, autoStartTimer } from './localStorage.js';
-import { displayMinutesOrSeconds, displayTime, displayTitle } from './calculations.js';
+import { displayMinutesOrSeconds, displayTime, displayTitle, checkMinTime } from './calculations.js';
+import { testingDivide } from './testing.js';
 
 let seconds = '00';
 let minutes = '00';
@@ -65,7 +66,7 @@ function calculateBreakDuration() {
 
 function startTimer() {
 	let millisecondsPassed = Date.now() - startTime;
-	let secondsPassed = Math.floor(millisecondsPassed / 1000);
+	let secondsPassed = Math.floor(millisecondsPassed / (1000 / testingDivide));
 	minutes = Math.floor(secondsPassed / 60);
 	seconds = secondsPassed % 60;
 	displayTime(minutes, seconds);
@@ -80,7 +81,7 @@ function startTimer() {
 
 function breakTimer() {
 	let millisecondsPassed = Date.now() - startTime;
-	let secondsPassed = Math.floor(millisecondsPassed / 1000);
+	let secondsPassed = Math.floor(millisecondsPassed / (1000 / testingDivide));
 	if (breakDurationSeconds === 0) {
 		breakNotificationSound.play();
 		document.title = 'PomoFlow';
@@ -135,16 +136,4 @@ for (let button of extendBreakButtons) {
 		let extraMinute = this.textContent.split(' ')[0];
 		breakDurationSeconds += parseInt(extraMinute) * 60;
 	});
-}
-
-//Check if timer has passed minimum time
-//Hide break button and prevent users from changing minimum time if minumum time not reached
-function checkMinTime(minutePassed, minimumTime) {
-	if (minutePassed >= minimumTime) {
-		buttonStart.style.visibility = 'visible';
-		minimumTimeInput.removeAttribute('disabled');
-	} else if (minimumTime > minutePassed) {
-		buttonStart.style.visibility = 'hidden';
-		minimumTimeInput.setAttribute('disabled', '');
-	}
 }
