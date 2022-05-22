@@ -50,7 +50,7 @@ function startTimer() {
 	seconds = secondsPassed % 60;
 	displayTime(minutes, seconds);
 	checkMinTime(minutes, parseInt(minimumTimeInput.value));
-	if (timerNotificationArr !== undefined && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
+	if (timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
 		timerNotificationSound.play();
 	}
 	displayTitle('work');
