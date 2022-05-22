@@ -31,37 +31,16 @@ buttonStart.onclick = function () {
 	}
 };
 
-function createLogItem() {
-	let newItem = document.createElement('li');
-	let span = document.createElement('SPAN');
-	let button = document.createElement('button');
-	button.textContent = '\u00D7';
-
-	//Delete log item when close button is clicked
-	button.addEventListener('click', function (evt) {
-		deleteLog(this);
-		evt.stopPropagation(); //prevents copying to clipboard when close button is clicked
-	});
-	button.setAttribute('onclick', 'deleteLog(this)'); //allow log item to be deleted after page refresh
-	button.classList.add('close-button');
-	span.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
-	span.append(button);
-	span.setAttribute('onclick', 'copyToClipboard(this.textContent)');
-	span.style.cursor = 'copy';
-	newItem.append(span);
-	logTimings.prepend(newItem);
-	localStorage.logTimings = logTimings.innerHTML;
-}
-
-function calculateBreakDuration() {
-	let timeWorkedSeconds = minutes * 60 + seconds;
-	breakDurationSeconds = Math.ceil(timeWorkedSeconds / xValueInput.value);
-	let breakMinutes = Math.floor(breakDurationSeconds / 60);
-	let breakSeconds = Math.ceil(breakDurationSeconds % 60);
-	// alert(`Work Time: ${minutes} minutes ${seconds} seconds \nBreak Time: ${breakMinutes} minutes ${breakSeconds} seconds `);
-	seconds = breakSeconds;
-	minutes = breakMinutes;
-	displayTitle('break');
+//Timer running
+function timerStartRunning() {
+	startTime = Date.now();
+	buttonStart.textContent = 'Break';
+	clearInterval(breakInterval);
+	extendBreakModalButton.classList.add('modal-invisible');
+	seconds = 0;
+	minutes = 0;
+	checkMinTime(minutes, parseInt(minimumTimeInput.value));
+	startInterval = setInterval(startTimer, 100);
 }
 
 function startTimer() {
@@ -114,17 +93,37 @@ function breakTimer() {
 	}
 }
 
-//Timer running
-function timerStartRunning() {
-	startTime = Date.now();
-	buttonStart.textContent = 'Break';
+function calculateBreakDuration() {
+	let timeWorkedSeconds = minutes * 60 + seconds;
+	breakDurationSeconds = Math.ceil(timeWorkedSeconds / xValueInput.value);
+	let breakMinutes = Math.floor(breakDurationSeconds / 60);
+	let breakSeconds = Math.ceil(breakDurationSeconds % 60);
+	// alert(`Work Time: ${minutes} minutes ${seconds} seconds \nBreak Time: ${breakMinutes} minutes ${breakSeconds} seconds `);
+	seconds = breakSeconds;
+	minutes = breakMinutes;
+	displayTitle('break');
+}
 
-	clearInterval(breakInterval);
-	extendBreakModalButton.classList.add('modal-invisible');
-	seconds = 0;
-	minutes = 0;
-	checkMinTime(minutes, parseInt(minimumTimeInput.value));
-	startInterval = setInterval(startTimer, 100);
+function createLogItem() {
+	let newItem = document.createElement('li');
+	let span = document.createElement('SPAN');
+	let button = document.createElement('button');
+	button.textContent = '\u00D7';
+
+	//Delete log item when close button is clicked
+	button.addEventListener('click', function (evt) {
+		deleteLog(this);
+		evt.stopPropagation(); //prevents copying to clipboard when close button is clicked
+	});
+	button.setAttribute('onclick', 'deleteLog(this)'); //allow log item to be deleted after page refresh
+	button.classList.add('close-button');
+	span.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
+	span.append(button);
+	span.setAttribute('onclick', 'copyToClipboard(this.textContent)');
+	span.style.cursor = 'copy';
+	newItem.append(span);
+	logTimings.prepend(newItem);
+	localStorage.logTimings = logTimings.innerHTML;
 }
 
 //Extend break buttons
