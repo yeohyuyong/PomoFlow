@@ -19,9 +19,9 @@ buttonStart.onclick = function () {
 	if (this.textContent === 'Start') {
 		timerStartRunning();
 	} else if (this.textContent === 'Break') {
+		clearInterval(startInterval);
 		this.textContent = 'Start';
 		minimumTimeInput.removeAttribute('disabled');
-		clearInterval(startInterval);
 		extendBreakModalButton.classList.remove('modal-invisible');
 		createLogItem();
 		calculateBreakDuration();
