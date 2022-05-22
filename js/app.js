@@ -12,7 +12,6 @@ const logTimings = document.querySelector('#logTimings');
 const extendBreakModalButton = document.querySelector('#extend-break-button');
 let startInterval;
 let breakInterval;
-
 let startTime;
 let breakDurationSeconds;
 
@@ -49,9 +48,7 @@ function startTimer() {
 	minutes = Math.floor(secondsPassed / 60);
 	seconds = secondsPassed % 60;
 	displayTime(minutes, seconds);
-
 	checkMinTime(minutes, parseInt(minimumTimeInput.value));
-
 	if (timerNotificationArr !== undefined && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
 		timerNotificationSound.play();
 	}
@@ -109,7 +106,6 @@ function createLogItem() {
 	let span = document.createElement('SPAN');
 	let button = document.createElement('button');
 	button.textContent = '\u00D7';
-
 	//Delete log item when close button is clicked
 	button.addEventListener('click', function (evt) {
 		deleteLog(this);
@@ -129,7 +125,6 @@ function createLogItem() {
 //Extend break buttons
 //Break extends by X minute depending on the button clicked
 const extendBreakButtons = document.querySelectorAll('#extend-break-modal .extend-break');
-
 for (let button of extendBreakButtons) {
 	button.addEventListener('click', function () {
 		let extraMinute = this.textContent.split(' ')[0];
