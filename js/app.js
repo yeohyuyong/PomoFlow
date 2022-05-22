@@ -26,7 +26,7 @@ buttonStart.onclick = function () {
 		createLogItem();
 		calculateBreakDuration();
 		startTime = Date.now();
-		breakInterval = setInterval(breakTimer, 1000);
+		breakInterval = setInterval(breakTimer, 100);
 	}
 };
 
@@ -123,7 +123,7 @@ function timerStartRunning() {
 	seconds = 0;
 	minutes = 0;
 	checkMinTime(minutes, parseInt(minimumTimeInput.value));
-	startInterval = setInterval(startTimer, 1000);
+	startInterval = setInterval(startTimer, 100);
 }
 
 //Extend break buttons
