@@ -10,6 +10,7 @@ const xValueInput = document.getElementById('x-value');
 const minimumTimeInput = document.querySelector('#minimum-time');
 const logTimings = document.querySelector('#logTimings');
 const extendBreakModalButton = document.querySelector('#extend-break-button');
+
 let startInterval;
 let breakInterval;
 let startTime;
@@ -33,8 +34,8 @@ buttonStart.onclick = function () {
 //Timer running
 function timerStartRunning() {
 	startTime = Date.now();
-	buttonStart.textContent = 'Break';
 	clearInterval(breakInterval);
+	buttonStart.textContent = 'Break';
 	extendBreakModalButton.classList.add('modal-invisible');
 	seconds = 0;
 	minutes = 0;
