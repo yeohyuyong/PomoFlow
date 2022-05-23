@@ -59,31 +59,25 @@ function startTimer() {
 function breakTimer() {
 	let millisecondsPassed = Date.now() - startTime;
 	let secondsPassed = Math.floor(millisecondsPassed / (1000 / testingDivide));
-	if (breakDurationSeconds === 0) {
+	let secondsRemaining = breakDurationSeconds - secondsPassed;
+	minutes = Math.floor(secondsRemaining / 60);
+	seconds = secondsRemaining % 60;
+	displayTime(minutes, seconds);
+	displayTitle('break');
+	if (breakDurationSeconds === 0 || secondsRemaining <= 0) {
 		clearInterval(breakInterval);
+		minutes = 0;
+		seconds = 0;
 		breakNotificationSound.play();
 		document.title = 'PomoFlow';
-		extendBreakModalButton.classList.add('modal-invisible');
-	} else {
-		let secondsRemaining = breakDurationSeconds - secondsPassed;
-		minutes = Math.floor(secondsRemaining / 60);
-		seconds = secondsRemaining % 60;
 		displayTime(minutes, seconds);
-		if (breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
-			breakNotificationSound.play();
+		extendBreakModalButton.classList.add('modal-invisible');
+		notifyMe();
+		if (autoStartTimer) {
+			startTimerLoop();
 		}
-		displayTitle('break');
-		// When timer ends
-		if (secondsRemaining <= 0) {
-			clearInterval(breakInterval);
-			breakNotificationSound.play();
-			document.title = 'PomoFlow';
-			extendBreakModalButton.classList.add('modal-invisible');
-			notifyMe();
-			if (autoStartTimer) {
-				startTimerLoop();
-			}
-		}
+	} else if (breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
+		breakNotificationSound.play();
 	}
 }
 
