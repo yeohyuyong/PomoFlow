@@ -1,7 +1,7 @@
 // Notification sound when timer is reached
 let timerNotificationSound = new Howl({
 	src: ['assets/sounds/timer-notification.mp3'],
-	volume: 0.3,
+	volume: 0.2,
 });
 
 // Notification sound for break

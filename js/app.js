@@ -1,6 +1,7 @@
 import { timerNotificationSound, breakNotificationSound, notifyMe } from './notification.js';
 import { timerNotificationArr, breakNotificationArr, autoStartTimer } from './localStorage.js';
-import { displayMinutesOrSeconds, displayTime, displayTitle } from './calculations.js';
+import { displayMinutesOrSeconds, displayTime, displayTitle, checkMinTime } from './calculations.js';
+import { testingDivide } from './testing.js';
 
 let seconds = '00';
 let minutes = '00';
@@ -9,33 +10,90 @@ const xValueInput = document.getElementById('x-value');
 const minimumTimeInput = document.querySelector('#minimum-time');
 const logTimings = document.querySelector('#logTimings');
 const extendBreakModalButton = document.querySelector('#extend-break-button');
+
 let startInterval;
 let breakInterval;
-
 let startTime;
 let breakDurationSeconds;
 
 buttonStart.onclick = function () {
 	if (this.textContent === 'Start') {
-		timerStartRunning();
+		startTimerLoop();
 	} else if (this.textContent === 'Break') {
+		clearInterval(startInterval);
 		this.textContent = 'Start';
 		minimumTimeInput.removeAttribute('disabled');
-		clearInterval(startInterval);
 		extendBreakModalButton.classList.remove('modal-invisible');
 		createLogItem();
 		calculateBreakDuration();
 		startTime = Date.now();
-		breakInterval = setInterval(breakTimer, 100);
+		breakInterval = setInterval(breakTimer, 1000);
 	}
 };
+
+//Timer running
+function startTimerLoop() {
+	startTime = Date.now();
+	clearInterval(breakInterval);
+	buttonStart.textContent = 'Break';
+	extendBreakModalButton.classList.add('modal-invisible');
+	seconds = 0;
+	minutes = 0;
+	checkMinTime(minutes, parseInt(minimumTimeInput.value));
+	startInterval = setInterval(startTimer, 1000);
+}
+
+function startTimer() {
+	let millisecondsPassed = Date.now() - startTime;
+	let secondsPassed = Math.floor(millisecondsPassed / (1000 / testingDivide));
+	minutes = Math.floor(secondsPassed / 60);
+	seconds = secondsPassed % 60;
+	displayTime(minutes, seconds);
+	checkMinTime(minutes, parseInt(minimumTimeInput.value));
+	if (timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
+		timerNotificationSound.play();
+	}
+	displayTitle('work');
+}
+
+function breakTimer() {
+	let millisecondsPassed = Date.now() - startTime;
+	let secondsPassed = Math.floor(millisecondsPassed / (1000 / testingDivide));
+	let secondsRemaining = breakDurationSeconds - secondsPassed;
+	minutes = Math.floor(secondsRemaining / 60);
+	seconds = secondsRemaining % 60;
+	displayTime(minutes, seconds);
+	displayTitle('break');
+	if (breakDurationSeconds === 0 || secondsRemaining <= 0) {
+		clearInterval(breakInterval);
+		minutes = 0;
+		seconds = 0;
+		breakNotificationSound.play();
+		document.title = 'PomoFlow';
+		displayTime(minutes, seconds);
+		extendBreakModalButton.classList.add('modal-invisible');
+		notifyMe();
+		if (autoStartTimer) {
+			startTimerLoop();
+		}
+	} else if (breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
+		breakNotificationSound.play();
+	}
+}
+
+function calculateBreakDuration() {
+	let timeWorkedSeconds = minutes * 60 + seconds;
+	breakDurationSeconds = Math.ceil(timeWorkedSeconds / xValueInput.value);
+	seconds = Math.ceil(breakDurationSeconds % 60);
+	minutes = Math.floor(breakDurationSeconds / 60);
+	displayTitle('break');
+}
 
 function createLogItem() {
 	let newItem = document.createElement('li');
 	let span = document.createElement('SPAN');
 	let button = document.createElement('button');
 	button.textContent = '\u00D7';
-
 	//Delete log item when close button is clicked
 	button.addEventListener('click', function (evt) {
 		deleteLog(this);
@@ -52,99 +110,12 @@ function createLogItem() {
 	localStorage.logTimings = logTimings.innerHTML;
 }
 
-function calculateBreakDuration() {
-	let timeWorkedSeconds = minutes * 60 + seconds;
-	breakDurationSeconds = Math.ceil(timeWorkedSeconds / xValueInput.value);
-	let breakMinutes = Math.floor(breakDurationSeconds / 60);
-	let breakSeconds = Math.ceil(breakDurationSeconds % 60);
-	// alert(`Work Time: ${minutes} minutes ${seconds} seconds \nBreak Time: ${breakMinutes} minutes ${breakSeconds} seconds `);
-	seconds = breakSeconds;
-	minutes = breakMinutes;
-	displayTitle('break');
-}
-
-function startTimer() {
-	let millisecondsPassed = Date.now() - startTime;
-	let secondsPassed = Math.floor(millisecondsPassed / 1000);
-	minutes = Math.floor(secondsPassed / 60);
-	seconds = secondsPassed % 60;
-	displayTime(minutes, seconds);
-
-	checkMinTime(minutes, parseInt(minimumTimeInput.value));
-
-	if (timerNotificationArr !== undefined && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
-		timerNotificationSound.play();
-	}
-	displayTitle('work');
-}
-
-function breakTimer() {
-	let millisecondsPassed = Date.now() - startTime;
-	let secondsPassed = Math.floor(millisecondsPassed / 1000);
-	if (breakDurationSeconds === 0) {
-		breakNotificationSound.play();
-		document.title = 'PomoFlow';
-		clearInterval(breakInterval);
-		extendBreakModalButton.classList.add('modal-invisible');
-		notifyMe();
-		if (autoStartTimer) {
-			timerStartRunning();
-		}
-	} else {
-		let secondsRemaining = breakDurationSeconds - secondsPassed;
-		minutes = Math.floor(secondsRemaining / 60);
-		seconds = secondsRemaining % 60;
-		displayTime(minutes, seconds);
-		if (breakNotificationArr !== undefined && breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
-			breakNotificationSound.play();
-		}
-		displayTitle('break');
-		// When timer ends
-		if (secondsRemaining <= 0) {
-			document.title = 'PomoFlow';
-			breakNotificationSound.play();
-			clearInterval(breakInterval);
-			extendBreakModalButton.classList.add('modal-invisible');
-			notifyMe();
-			if (autoStartTimer) {
-				timerStartRunning();
-			}
-		}
-	}
-}
-
-//Timer running
-function timerStartRunning() {
-	startTime = Date.now();
-	buttonStart.textContent = 'Break';
-
-	clearInterval(breakInterval);
-	extendBreakModalButton.classList.add('modal-invisible');
-	seconds = 0;
-	minutes = 0;
-	checkMinTime(minutes, parseInt(minimumTimeInput.value));
-	startInterval = setInterval(startTimer, 100);
-}
-
 //Extend break buttons
 //Break extends by X minute depending on the button clicked
 const extendBreakButtons = document.querySelectorAll('#extend-break-modal .extend-break');
-
 for (let button of extendBreakButtons) {
 	button.addEventListener('click', function () {
 		let extraMinute = this.textContent.split(' ')[0];
 		breakDurationSeconds += parseInt(extraMinute) * 60;
 	});
-}
-
-//Check if timer has passed minimum time
-//Hide break button and prevent users from changing minimum time if minumum time not reached
-function checkMinTime(minutePassed, minimumTime) {
-	if (minutePassed >= minimumTime) {
-		buttonStart.style.visibility = 'visible';
-		minimumTimeInput.removeAttribute('disabled');
-	} else if (minimumTime > minutePassed) {
-		buttonStart.style.visibility = 'hidden';
-		minimumTimeInput.setAttribute('disabled', '');
-	}
 }
