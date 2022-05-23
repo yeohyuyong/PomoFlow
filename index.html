@@ -250,7 +250,7 @@
 
     function copyToClipboard(copyText) {
       //Copy all except the close button
-      copyText = copyText.slice(0, -1)
+      copyText = "0:" + copyText.slice(0, -1)
       navigator.clipboard.writeText(copyText).then(() => {
       });
     }
