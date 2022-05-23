@@ -50,7 +50,7 @@ function startTimer() {
 	seconds = secondsPassed % 60;
 	displayTime(minutes, seconds);
 	checkMinTime(minutes, parseInt(minimumTimeInput.value));
-	if (timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
+	if (timerNotificationArr && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
 		timerNotificationSound.play();
 	}
 	displayTitle('work');
@@ -76,7 +76,7 @@ function breakTimer() {
 		if (autoStartTimer) {
 			startTimerLoop();
 		}
-	} else if (breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
+	} else if (breakNotificationArr && breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
 		breakNotificationSound.play();
 	}
 }
@@ -86,6 +86,7 @@ function calculateBreakDuration() {
 	breakDurationSeconds = Math.ceil(timeWorkedSeconds / xValueInput.value);
 	seconds = Math.ceil(breakDurationSeconds % 60);
 	minutes = Math.floor(breakDurationSeconds / 60);
+	displayTime(minutes, seconds);
 	displayTitle('break');
 }
 
