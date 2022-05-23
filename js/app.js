@@ -27,7 +27,7 @@ buttonStart.onclick = function () {
 		createLogItem();
 		calculateBreakDuration();
 		startTime = Date.now();
-		breakInterval = setInterval(breakTimer, 100);
+		breakInterval = setInterval(breakTimer, 1000);
 	}
 };
 
@@ -40,7 +40,7 @@ function startTimerLoop() {
 	seconds = 0;
 	minutes = 0;
 	checkMinTime(minutes, parseInt(minimumTimeInput.value));
-	startInterval = setInterval(startTimer, 100);
+	startInterval = setInterval(startTimer, 1000);
 }
 
 function startTimer() {
@@ -60,28 +60,24 @@ function breakTimer() {
 	let millisecondsPassed = Date.now() - startTime;
 	let secondsPassed = Math.floor(millisecondsPassed / (1000 / testingDivide));
 	if (breakDurationSeconds === 0) {
+		clearInterval(breakInterval);
 		breakNotificationSound.play();
 		document.title = 'PomoFlow';
-		clearInterval(breakInterval);
 		extendBreakModalButton.classList.add('modal-invisible');
-		notifyMe();
-		if (autoStartTimer) {
-			startTimerLoop();
-		}
 	} else {
 		let secondsRemaining = breakDurationSeconds - secondsPassed;
 		minutes = Math.floor(secondsRemaining / 60);
 		seconds = secondsRemaining % 60;
 		displayTime(minutes, seconds);
-		if (breakNotificationArr !== undefined && breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
+		if (breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
 			breakNotificationSound.play();
 		}
 		displayTitle('break');
 		// When timer ends
 		if (secondsRemaining <= 0) {
-			document.title = 'PomoFlow';
-			breakNotificationSound.play();
 			clearInterval(breakInterval);
+			breakNotificationSound.play();
+			document.title = 'PomoFlow';
 			extendBreakModalButton.classList.add('modal-invisible');
 			notifyMe();
 			if (autoStartTimer) {
@@ -94,11 +90,8 @@ function breakTimer() {
 function calculateBreakDuration() {
 	let timeWorkedSeconds = minutes * 60 + seconds;
 	breakDurationSeconds = Math.ceil(timeWorkedSeconds / xValueInput.value);
-	let breakMinutes = Math.floor(breakDurationSeconds / 60);
-	let breakSeconds = Math.ceil(breakDurationSeconds % 60);
-	// alert(`Work Time: ${minutes} minutes ${seconds} seconds \nBreak Time: ${breakMinutes} minutes ${breakSeconds} seconds `);
-	seconds = breakSeconds;
-	minutes = breakMinutes;
+	seconds = Math.ceil(breakDurationSeconds % 60);
+	minutes = Math.floor(breakDurationSeconds / 60);
 	displayTitle('break');
 }
 
