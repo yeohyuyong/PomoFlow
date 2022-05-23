@@ -101,7 +101,7 @@ function createLogItem() {
 	});
 	button.setAttribute('onclick', 'deleteLog(this)'); //allow log item to be deleted after page refresh
 	button.classList.add('close-button');
-	span.textContent = `0:${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
+	span.textContent = `${displayMinutesOrSeconds(minutes)}:${displayMinutesOrSeconds(seconds)}`;
 	span.append(button);
 	span.setAttribute('onclick', 'copyToClipboard(this.textContent)');
 	span.style.cursor = 'copy';
