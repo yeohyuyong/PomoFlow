@@ -7,13 +7,12 @@ function displayMinutesOrSeconds(time) {
 	return time <= 9 ? '0' + time : time;
 }
 
-function displayTime(minutes, seconds) {
+function displayTime(minutes, seconds, status) {
 	minutesUp.innerHTML = minutes <= 9 ? '0' + minutes : minutes;
 	secondsUp.innerHTML = seconds <= 9 ? '0' + seconds : seconds;
-}
-
-function displayTitle(status) {
-	if (status === 'break') {
+	if (status === 'end') {
+		document.title = 'PomoFlow'
+	} else if (status === 'break') {
 		document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
 	} else if (status === 'work') {
 		document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for Work!`;
@@ -32,4 +31,4 @@ function checkMinTime(minutePassed, minimumTime) {
 	}
 }
 
-export { displayMinutesOrSeconds, displayTime, displayTitle, checkMinTime };
+export { displayMinutesOrSeconds, displayTime, checkMinTime };

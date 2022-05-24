@@ -1,6 +1,6 @@
 import { timerNotificationSound, breakNotificationSound, notifyMe } from './notification.js';
 import { timerNotificationArr, breakNotificationArr, autoStartTimer } from './localStorage.js';
-import { displayMinutesOrSeconds, displayTime, displayTitle, checkMinTime } from './calculations.js';
+import { displayMinutesOrSeconds, displayTime, checkMinTime } from './calculations.js';
 import { testingDivide } from './testing.js';
 
 let seconds = '00';
@@ -48,12 +48,11 @@ function startTimer() {
 	let secondsPassed = Math.floor(millisecondsPassed / (1000 / testingDivide));
 	minutes = Math.floor(secondsPassed / 60);
 	seconds = secondsPassed % 60;
-	displayTime(minutes, seconds);
+	displayTime(minutes, seconds, 'work');
 	checkMinTime(minutes, parseInt(minimumTimeInput.value));
 	if (timerNotificationArr && timerNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
 		timerNotificationSound.play();
 	}
-	displayTitle('work');
 }
 
 function breakTimer() {
@@ -62,15 +61,13 @@ function breakTimer() {
 	let secondsRemaining = breakDurationSeconds - secondsPassed;
 	minutes = Math.floor(secondsRemaining / 60);
 	seconds = secondsRemaining % 60;
-	displayTime(minutes, seconds);
-	displayTitle('break');
+	displayTime(minutes, seconds, 'break');
 	if (breakDurationSeconds === 0 || secondsRemaining <= 0) {
 		clearInterval(breakInterval);
 		minutes = 0;
 		seconds = 0;
 		breakNotificationSound.play();
-		document.title = 'PomoFlow';
-		displayTime(minutes, seconds);
+		displayTime(minutes, seconds, 'end');
 		extendBreakModalButton.classList.add('modal-invisible');
 		notifyMe();
 		if (autoStartTimer) {
@@ -86,8 +83,7 @@ function calculateBreakDuration() {
 	breakDurationSeconds = Math.ceil(timeWorkedSeconds / xValueInput.value);
 	seconds = Math.ceil(breakDurationSeconds % 60);
 	minutes = Math.floor(breakDurationSeconds / 60);
-	displayTime(minutes, seconds);
-	displayTitle('break');
+	displayTime(minutes, seconds, 'break');
 }
 
 function createLogItem() {
