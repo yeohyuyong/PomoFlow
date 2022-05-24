@@ -17,3 +17,11 @@ for (let button of navButtons) {
 		}
 	});
 }
+
+const clearLogButton = document.querySelector('.clear-log-button');
+const logTimings = document.querySelector('#logTimings');
+
+clearLogButton.addEventListener('click', function () {
+	logTimings.innerHTML = '';
+	localStorage.logTimings = logTimings.innerHTML;
+})
