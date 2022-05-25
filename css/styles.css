@@ -10,7 +10,7 @@ html {
 
 body {
 	background: var(--black);
-	font-family: 'Azeret Mono', monospace;
+	font-family: 'Open Sans', sans-serif;
 	height: 100%;
 }
 
@@ -53,6 +53,7 @@ section {
 
 .timerText {
 	font-size: 10rem;
+	font-family: 'Azeret Mono', monospace;
 }
 
 #extend-break-button,
