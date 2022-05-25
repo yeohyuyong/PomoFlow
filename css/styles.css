@@ -164,7 +164,7 @@ input[type='checkbox']:hover {
 
 @media (max-width: 576px) {
 	html {
-		font-size: 10px;
+		font-size: 13px;
 	}
 
 	ul.navbar-nav {
@@ -172,11 +172,11 @@ input[type='checkbox']:hover {
 	}
 
 	.modal {
-		font-size: 1.7rem;
+		font-size: 1.3rem;
 	}
 
 	.modal-title {
-		font-size: 2rem;
+		font-size: 1.7rem;
 	}
 
 	#extend-break-button,
