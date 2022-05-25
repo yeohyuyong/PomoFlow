@@ -10,7 +10,7 @@ html {
 
 body {
 	background: var(--black);
-	font-family: 'Azeret Mono', monospace;
+	font-family: 'Open Sans', sans-serif;
 	height: 100%;
 }
 
@@ -43,6 +43,7 @@ section {
 
 #navbar-title {
 	font-size: 3rem;
+	font-weight: bold;
 	color: var(--white);
 }
 
@@ -53,6 +54,7 @@ section {
 
 .timerText {
 	font-size: 10rem;
+	font-family: 'Azeret Mono', monospace;
 }
 
 #extend-break-button,
@@ -79,7 +81,7 @@ section {
 	padding: 1rem 2rem;
 	margin: 1rem;
 	cursor: pointer;
-	border-radius: 0.4rem;
+	border-radius: 0.5rem;
 	border: 0.3rem solid var(--white);
 	background: none;
 	position: relative;
@@ -110,7 +112,7 @@ section {
 	background-color: white;
 }
 
-.img-hidden {
+.icon-hidden {
 	display: none;
 }
 
@@ -122,6 +124,27 @@ section {
 	height: 50%;
 	width: 30%;
 	margin: 0.5rem 0.3rem;
+}
+
+.modal-header button:focus {
+	box-shadow: none;
+}
+
+.modal {
+	font-size: 1.2rem;
+}
+
+.modal-title {
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.form-control:focus {
+	box-shadow: none;
+}
+
+input[type='checkbox']:hover {
+	box-shadow: none;
 }
 
 @media (max-width: 992px) {
