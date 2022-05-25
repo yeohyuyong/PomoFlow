@@ -43,6 +43,7 @@ section {
 
 #navbar-title {
 	font-size: 3rem;
+	font-weight: bold;
 	color: var(--white);
 }
 
@@ -80,7 +81,7 @@ section {
 	padding: 1rem 2rem;
 	margin: 1rem;
 	cursor: pointer;
-	border-radius: 0.4rem;
+	border-radius: 0.5rem;
 	border: 0.3rem solid var(--white);
 	background: none;
 	position: relative;
@@ -127,6 +128,15 @@ section {
 
 .modal-header button:focus {
 	box-shadow: none;
+}
+
+.modal {
+	font-size: 1.2rem;
+}
+
+.modal-title {
+	font-size: 2rem;
+	font-weight: bold;
 }
 
 .form-control:focus {
