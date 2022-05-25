@@ -143,6 +143,14 @@ section {
 	box-shadow: none;
 }
 
+input[type='checkbox'] {
+	height: 1.5rem;
+	padding-left: 3rem;
+	margin-left: 2rem;
+	position: relative;
+	left: 11px;
+}
+
 input[type='checkbox']:hover {
 	box-shadow: none;
 }
