@@ -1,10 +1,12 @@
 const autoStartTimerInput = document.querySelector('#auto-start-timer');
+const desktopNotificationInput = document.querySelector('#desktop-notification');
 const timerNotificationInput = document.getElementById('timerNotification');
 const breakNotificationInput = document.getElementById('breakNotification');
 const minimumTimeInput = document.querySelector('#minimum-time');
 const xValueInput = document.getElementById('x-value');
 
 let autoStartTimer;
+let desktopNotification;
 let xValue;
 let minimumTime;
 let breakNotification;
@@ -24,6 +26,20 @@ if (!localStorage.autoStartTimer) {
 autoStartTimerInput.addEventListener('change', () => {
 	autoStartTimer = autoStartTimerInput.checked;
 	window.localStorage.setItem('autoStartTimer', autoStartTimer);
+});
+
+//Localstorage for desktop notification
+if (!localStorage.desktopNotification) {
+	desktopNotificationInput.checked = false;
+	desktopNotification = false;
+} else {
+	desktopNotificationInput.checked = localStorage.desktopNotification === 'true';
+	desktopNotification = desktopNotificationInput.checked;
+}
+
+desktopNotificationInput.addEventListener('change', () => {
+	desktopNotification = desktopNotificationInput.checked;
+	window.localStorage.setItem('desktopNotification', desktopNotification);
 });
 
 // Localstorage for minimum time input
