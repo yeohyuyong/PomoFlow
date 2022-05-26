@@ -24,4 +24,4 @@ const logTimings = document.querySelector('#logTimings');
 clearLogButton.addEventListener('click', function () {
 	logTimings.innerHTML = '';
 	localStorage.logTimings = logTimings.innerHTML;
-})
+});
