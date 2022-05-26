@@ -1,5 +1,5 @@
-import { timerNotificationSound, breakNotificationSound, desktopNotification } from './notification.js';
-import { timerNotificationArr, breakNotificationArr, autoStartTimer } from './localStorage.js';
+import { timerNotificationSound, breakNotificationSound, notifyMe } from './notification.js';
+import { timerNotificationArr, breakNotificationArr, autoStartTimer, desktopNotification } from './localStorage.js';
 import { displayMinutesOrSeconds, displayTime, checkMinTime } from './calculations.js';
 import { testingDivide } from './testing.js';
 
@@ -69,10 +69,8 @@ function breakTimer() {
 		breakNotificationSound.play();
 		displayTime(minutes, seconds, 'end');
 		extendBreakModalButton.classList.add('modal-invisible');
-		desktopNotification();
-		if (autoStartTimer) {
-			startTimerLoop();
-		}
+		desktopNotification && notifyMe();
+		autoStartTimer && startTimerLoop();
 	} else if (breakNotificationArr && breakNotificationArr.indexOf(minutes) !== -1 && seconds === 0) {
 		breakNotificationSound.play();
 	}

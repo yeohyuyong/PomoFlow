@@ -142,9 +142,9 @@
           <h5 class="modal-title" id="staticBackdropLabel">Settings</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body mx-3">
           <form id="modalForm">
-            <div class="form-group row">
+            <div class="form-group row d-flex align-items-center">
               <label class="col-6 col-form-label" for="x-value">X-value (X &ge; 1)</label>
               <div class="col-6">
                 <input type="number" min="1" max="10" step="1" class="form-control" id="x-value" />
@@ -153,7 +153,7 @@
 
             <hr>
 
-            <div class="form-group row">
+            <div class="form-group row d-flex align-items-center">
               <label class="col-6 col-form-label" for="minimum-time">Minimum Time</label>
               <div class="col-6">
                 <input type="number" min="0" class="form-control" id="minimum-time" />
@@ -162,25 +162,37 @@
 
             <hr>
 
-            <div class="form-check form-switch">
-              <label class="form-check-label" for="auto-start-timer">Auto Start Timer</label>
-              <input class="form-check-input" type="checkbox" role="switch" id="auto-start-timer">
+            <div class="form-group row d-flex align-items-center">
+              <label class="form-check-label col-6" for="auto-start-timer">Auto Start Timer</label>
+              <div class="form-check form-switch col-6">
+                <input class="form-check-input" type="checkbox" role="switch" id="auto-start-timer">
+              </div>
             </div>
 
             <hr>
 
-            <div class="form-group row">
-              <label class="col-6 col-form-label" for="timerNotification">Timer Notifications</label>
-              <div class="col-6">
+            <div class="form-group row d-flex align-items-center">
+              <label class="form-check-label col-6" for="desktop-notification">Desktop Notification</label>
+              <div class="form-check form-switch col-6">
+                <input class="form-check-input" type="checkbox" role="switch" id="desktop-notification">
+              </div>
+            </div>
+
+
+            <hr>
+
+            <div class="form-group row d-flex align-items-center">
+              <label class="col-sm-6 col-form-label" for="timerNotification">Timer Notifications</label>
+              <div class="col-sm-6">
                 <input type="text" class="form-control" id="timerNotification" />
               </div>
             </div>
 
             <hr>
 
-            <div class="form-group row">
-              <label class="col-6 col-form-label" for="breakNotification">Break Notifications</label>
-              <div class="col-6">
+            <div class="form-group row d-flex align-items-center">
+              <label class="col-sm-6 col-form-label" for="breakNotification">Break Notifications</label>
+              <div class="col-sm-6">
                 <input type="text" class="form-control" id="breakNotification" />
               </div>
             </div>

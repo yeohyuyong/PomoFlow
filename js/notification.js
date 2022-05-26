@@ -11,7 +11,7 @@ let breakNotificationSound = new Howl({
 });
 
 // Desktop notification when timer ends
-function desktopNotification() {
+function notifyMe() {
 	if (!window.Notification) {
 		console.log('Browser does not support notifications.');
 	} else {
@@ -43,4 +43,4 @@ function desktopNotification() {
 	}
 }
 
-export { timerNotificationSound, breakNotificationSound, desktopNotification };
+export { timerNotificationSound, breakNotificationSound, notifyMe };

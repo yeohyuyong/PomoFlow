@@ -11,7 +11,7 @@ function displayTime(minutes, seconds, status) {
 	minutesUp.innerHTML = minutes <= 9 ? '0' + minutes : minutes;
 	secondsUp.innerHTML = seconds <= 9 ? '0' + seconds : seconds;
 	if (status === 'end') {
-		document.title = 'PomoFlow'
+		document.title = 'PomoFlow';
 	} else if (status === 'break') {
 		document.title = `${minutesUp.innerHTML}:${secondsUp.innerHTML} - Time for a break!`;
 	} else if (status === 'work') {
