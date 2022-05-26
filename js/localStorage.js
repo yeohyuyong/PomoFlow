@@ -101,4 +101,4 @@ breakNotificationInput.addEventListener('change', (e) => {
 	breakNotificationArr = breakNotificationArr.map((time) => parseInt(time));
 });
 
-export { timerNotificationArr, breakNotificationArr, autoStartTimer };
+export { timerNotificationArr, breakNotificationArr, autoStartTimer, desktopNotification };
